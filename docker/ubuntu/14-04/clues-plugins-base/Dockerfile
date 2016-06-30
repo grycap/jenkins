@@ -1,5 +1,5 @@
 # Dockerfile to create a base container for the IM service
-FROM grycapjenkins/git-base
+FROM grycap/jenkins:ubuntu14.04-git-base
 LABEL description="Base container image to run python tests."
 
 # Update and install all the neccesary packages
