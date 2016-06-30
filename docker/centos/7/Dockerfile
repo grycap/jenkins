@@ -1,0 +1,22 @@
+FROM centos:7
+LABEL description="Base container image with git and Jenkins user."
+
+# Update and install all the neccesary packages
+RUN yum -y update \
+ && yum clean all
+
+RUN yum -y install git \
+ && yum -y install sudo \
+ && yum clean all
+
+
+# Add jenkins user/group  
+RUN groupadd -g 112 devel \
+ && useradd -u 105 -g 112 jenkins
+
+RUN gpasswd -a jenkins wheel
+
+# Enable passwordless sudo for users under the "sudo" group
+RUN sed -i.bkp -e \
+      's/%wheel\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%wheel ALL=NOPASSWD:ALL/g' \
+      /etc/sudoers
