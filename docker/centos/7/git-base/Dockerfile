@@ -17,7 +17,8 @@ RUN groupadd -g 112 devel \
 
 RUN gpasswd -a jenkins wheel
 
-# Enable passwordless sudo for users under the "sudo" group
+# Enable passwordless sudo for users under the "wheel" group
 RUN sed -i.bkp -e \
-      's/%wheel\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%wheel ALL=NOPASSWD:ALL/g' \
-      /etc/sudoers
+  's/#\s%wheel\sALL=NOPASSWD:ALL/%wheel ALL=NOPASSWD:ALL/g' \
+  /etc/sudoers
+
