@@ -1,6 +1,6 @@
-# Dockerfile to create a base container for the IM service
 FROM ubuntu:14.04
 LABEL description="Base container image with git and Jenkins user."
+MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
 # Update and install all the neccesary packages
 RUN apt-get update && apt-get install -y \
