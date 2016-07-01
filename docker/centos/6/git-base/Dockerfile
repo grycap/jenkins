@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:6
 LABEL description="Base container image with git and Jenkins user."
 MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
