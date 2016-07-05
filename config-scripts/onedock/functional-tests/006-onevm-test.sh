@@ -26,3 +26,5 @@ sudo lxc-attach -n onetest -- docker ps | grep one-1
 sudo lxc-attach -n onetest -- docker inspect -f '{{.State.Running}}' one-1
 # Check the images repository
 sudo lxc-attach -n onetest -- docker images | grep "one-1"
+# Delete container
+sudo lxc-attach -n onetest -- onevm delete 1
