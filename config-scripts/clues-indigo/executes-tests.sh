@@ -1,5 +1,3 @@
 #!/bin/bash
-cd /tmp
-git clone https://github.com/indigo-dc/clues-indigo.git
-cd clues-indigo/
-nosetests tests/mesos_test.py
+
+nosetests -v tests/indigo_orchestrator_test.py tests/mesos_test.py tests/condor_test.py
