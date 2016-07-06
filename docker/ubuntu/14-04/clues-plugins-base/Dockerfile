@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     python-ply \
     python-mock \
     python-nose \
+    python-yaml \
+    htcondor \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
