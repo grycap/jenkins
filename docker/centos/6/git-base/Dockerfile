@@ -10,10 +10,9 @@ RUN yum -y install git \
  && yum -y install sudo \
  && yum clean all
 
-
 # Add jenkins user/group  
-RUN groupadd -g 112 devel \
- && useradd -u 105 -g 112 jenkins
+RUN groupadd -g 1001 jenkins \
+&& useradd -m -d /home/jenkins -s /bin/bash -g jenkins -u 1001 jenkins
 
 RUN gpasswd -a jenkins wheel
 
