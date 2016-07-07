@@ -19,3 +19,5 @@ RUN gpasswd -a jenkins wheel
 # Enable passwordless sudo for users under the "wheel" group
 RUN sed -i.bkp -e 's/#\s%wheel.*NOPASSWD.*/%wheel ALL=(ALL) NOPASSWD: ALL/g' /etc/sudoers
 
+# Fix issue: 'sudo: sorry, you must have a tty to run sudo'
+RUN sed -i.bkp -e 's/Defaults.*requiretty.*/# Defaults requiretty/g' /etc/sudoers
