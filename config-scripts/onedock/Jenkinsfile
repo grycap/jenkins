@@ -1,3 +1,5 @@
+#!groovy
+
 node('lxc') {
     stage 'Check project'
     git url: 'https://github.com/indigo-dc/onedock.git'
