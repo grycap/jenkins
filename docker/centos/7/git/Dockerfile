@@ -1,5 +1,5 @@
 FROM grycap/jenkins:centos7-base
-LABEL description="Base container image with git"
+LABEL description="Container with the latest version of Git"
 MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
 # Update and install all the necessary packages

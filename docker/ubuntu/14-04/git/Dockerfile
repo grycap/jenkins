@@ -1,8 +1,9 @@
-FROM grycap/jenkins:centos6-base
+FROM grycap/jenkins:ubuntu14.04-base
 LABEL description="Container with the latest version of Git"
 MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
 # Update and install all the necessary packages
-RUN yum -y update && yum install -y \
+RUN apt-get update && apt-get install -y \
     git \
- && yum clean all
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
