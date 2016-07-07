@@ -4,6 +4,6 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
 # Update and install all the necessary packages
 RUN apt-get update && apt-get install -y \
-    vnc4server
+    vnc4server \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
