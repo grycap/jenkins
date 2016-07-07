@@ -5,7 +5,6 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 # Update and install all the necessary packages
 RUN apt-get update && apt-get install -y \
     curl \
-    python-ply \
     python-yaml \
     htcondor \
  && apt-get clean \

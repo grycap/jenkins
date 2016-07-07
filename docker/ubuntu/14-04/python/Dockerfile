@@ -8,5 +8,7 @@ RUN apt-get update && apt-get install -y \
     python2.7 \
     python-nose \
     python-mock \
+    python-ply \
+    python-coverage \        
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
