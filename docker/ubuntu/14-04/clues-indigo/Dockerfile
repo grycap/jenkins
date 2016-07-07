@@ -1,13 +1,11 @@
-FROM grycap/jenkins:ubuntu14.04-git-base
-LABEL description="Base container image to run python tests."
+FROM grycap/jenkins:ubuntu14.04-python
+LABEL description="Container used in the clues-indigo testing"
 MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
-# Update and install all the neccesary packages
+# Update and install all the necessary packages
 RUN apt-get update && apt-get install -y \
     curl \
     python-ply \
-    python-mock \
-    python-nose \
     python-yaml \
     htcondor \
  && apt-get clean \

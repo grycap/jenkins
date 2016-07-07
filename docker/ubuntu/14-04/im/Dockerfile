@@ -1,5 +1,5 @@
-FROM ubuntu:14.04
-LABEL description="base container image to run the IM service. (http://www.grycap.upv.es/im)"
+FROM grycap/jenkins:ubuntu14.04-python
+LABEL description="Image to run the IM service. (http://www.grycap.upv.es/im)"
 MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
 # Update and install all the neccesary packages
@@ -9,8 +9,6 @@ RUN apt-get update && apt-get install -y \
     python-pip \
     python-soappy \
     python-dateutil \
-    python-mock \
-    python-nose \
     openssh-client \
     sshpass \
     git \
