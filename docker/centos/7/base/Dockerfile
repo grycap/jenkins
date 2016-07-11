@@ -5,6 +5,7 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 # Update and install all the necessary packages
 RUN yum -y update && yum install -y \
     sudo \
+    rpm-build \
  && yum clean all
 
 # Add jenkins user/group
