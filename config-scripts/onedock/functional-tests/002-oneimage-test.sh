@@ -1,7 +1,7 @@
 # Create test data
 sudo lxc-attach -n onetest -- bash -c 'cat > ubuntu-docker.tmpl << EOF
 NAME="ubuntu"
-PATH=docker://rastasheep/ubuntu-sshd
+PATH=docker://ubuntu:latest
 TYPE=OS
 DESCRIPTION="Ubuntu Trusty with SSHd"
 EOF'
