@@ -8,29 +8,49 @@ node('lxc') {
 
         stage 'Check for existing containers'
         sh 'curl -s $RAW_REPO_PATH/stop-destroy-existing-containers.sh | bash'
-    
+
         stage 'Create lxc container'
         sh 'curl -s $RAW_REPO_PATH/create-lxc-container.sh | bash'
-    
+
         stage 'Onedatastore test'
         sh 'curl -s $RAW_REPO_PATH/functional-tests/001-onedatastore-test.sh | bash'
-    
+
         stage 'Oneimage test'
         sh 'curl -s $RAW_REPO_PATH/functional-tests/002-oneimage-test.sh | bash'
-    
+
         stage 'Onevnet test'
         sh 'curl -s $RAW_REPO_PATH/functional-tests/003-onevnet-test.sh | bash'
-    
+
         stage 'Onehost test'
         sh 'curl -s $RAW_REPO_PATH/functional-tests/004-onehost-test.sh | bash'
-    
+
         stage 'Onevm test 1'
         sh 'curl -s $RAW_REPO_PATH/functional-tests/005-onevm-test.sh | bash'
-    
+
         stage 'Onevm test 2'
         sh 'curl -s $RAW_REPO_PATH/functional-tests/006-onevm-test.sh | bash'
-        
+
         stage 'Destroy existing containers'
-        sh 'curl -s $RAW_REPO_PATH/stop-destroy-existing-containers.sh | bash'        
+        sh 'curl -s $RAW_REPO_PATH/stop-destroy-existing-containers.sh | bash'
     }
+
+    stage 'Generate Packages'
+    parallel 'centos7': {
+        node('docker') {
+            docker.image('grycap/jenkins:centos7-git').inside {
+                git branch: 'packaging', url: 'https://github.com/indigo-dc/onedock.git'
+                sh 'cd packaging/rpm && ./build-rpm.sh -f ../../'
+                archive 'packaging/rpm/dist/RPMS/noarch/*'
+            }
+        }
+    }, 'ubuntu14.04': {
+        node('docker') {
+            docker.image('grycap/jenkins:ubuntu14.04-git').inside {
+                git branch: 'packaging', url: 'https://github.com/indigo-dc/onedock.git'
+                sh 'cd packaging/debian && ./build-dev.sh -f ../../'
+                archive 'packaging/debian/dist/*'
+            }
+        }
+    },
+    failFast: true
 }
