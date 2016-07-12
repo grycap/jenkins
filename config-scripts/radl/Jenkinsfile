@@ -1,19 +1,46 @@
 #!groovy
 node {
-    stage 'Checkout Git'
-    git url: 'https://github.com/grycap/RADL'
-
     stage 'Launch Unit Tests'
     node('docker') {
         docker.image('grycap/jenkins:ubuntu14.04-python').inside {
+            git url: 'https://github.com/grycap/RADL'
             sh 'nosetests test/TestRADL.py --with-xunit --with-coverage --cover-erase --cover-html --cover-package=radl'
-        }
-    }
 
+            stash includes: 'cover/*', name: 'Coverage'
+            stash includes: 'nosetests.xml', name: 'XUnit'
+    }}
+    
+    stage 'Publish Unit Tests'  
+    unstash 'XUnit'
+    step([
+        $class: 'XUnitPublisher', 
+        testTimeMargin: '3000', 
+        thresholdMode: 1,
+        tools: [[
+            $class: 'JUnitType', 
+            deleteOutputFiles: true, 
+            failIfNotNew: true, 
+            pattern: 'nosetests.xml', 
+            skipNoTestFiles: true, 
+            stopProcessingIfError: true
+    ]]])
+    
+    stage 'Publish Coverage'  
+    unstash 'Coverage'    
+    publishHTML(target: [
+        allowMissing: true, 
+        alwaysLinkToLastBuild: true, 
+        keepAll: false, 
+        reportDir: 'cover', 
+        reportFiles: 'index.html', 
+        reportName: 'Coverage Report'
+    ])
+    
     stage 'Generate Packages'
     parallel 'centos6': {
         node('docker') {
             docker.image('grycap/jenkins:centos6-git').inside {
+                git url: 'https://github.com/grycap/RADL'                
                 sh 'sudo ./packages/generate_rpm.sh 1.el6'
                 archive 'dist_pkg/*'
             }
@@ -21,6 +48,7 @@ node {
     }, 'centos7': {
         node('docker') {
             docker.image('grycap/jenkins:centos7-git').inside {
+                git url: 'https://github.com/grycap/RADL'                  
                 sh 'sudo ./packages/generate_rpm.sh 1.el7'
                 archive 'dist_pkg/*'
             }
@@ -28,10 +56,11 @@ node {
     }, 'ubuntu14.04': {
         node('docker') {
             docker.image('grycap/jenkins:ubuntu14.04-git').inside {
+                git url: 'https://github.com/grycap/RADL'                  
                 sh 'sudo ./packages/generate_deb.sh'
                 archive 'dist_pkg/*'
             }
         }
     },
-    failFast: true
+    failFast: true    
 }
