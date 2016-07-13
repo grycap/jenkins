@@ -6,6 +6,8 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 RUN apt-get update && apt-get install -y \
     python-pbr \
     python-yaml \
-    python-dateutil \    
+    python-dateutil \
+    python-fixtures \
+    python-testscenarios \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
