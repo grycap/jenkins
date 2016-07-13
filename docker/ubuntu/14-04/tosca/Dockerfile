@@ -21,7 +21,3 @@ RUN cd tosca-parser \
  && rm toscaparser/tests/test_* \
  && mv test_indigo.py toscaparser/tests/ \
  && rm toscaparser/extensions/nfv/tests/test_tosca_nfv_tpl.py
-
-
-
-
