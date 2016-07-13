@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     python-nose \
     python-mock \
     python-ply \
-    python-coverage \        
+    python-tox \
+    python-coverage \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
