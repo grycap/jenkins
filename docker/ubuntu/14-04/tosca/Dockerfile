@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+USER jenkins
+
 # Clone the tosca-parser project
 RUN git clone https://github.com/indigo-dc/tosca-parser
 
