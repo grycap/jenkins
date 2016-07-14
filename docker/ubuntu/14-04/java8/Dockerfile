@@ -1,5 +1,5 @@
 FROM grycap/jenkins:ubuntu14.04-git
-LABEL description="Container with latest version of Maven and Java 8"
+LABEL description="Container with latest version of Java 8"
 MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
 # Update and install all the necessary packages
