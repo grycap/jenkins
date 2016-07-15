@@ -1,10 +1,9 @@
 # Dockerfile to create a container with the EC3 service
-FROM ubuntu:14.04
+FROM grycap/jenkins:ubuntu14.04-git
 MAINTAINER Amanda Calatrava <amcaar#i3m.upv.es>
 LABEL version="1.0"
 LABEL description="Elastic Cloud Computing Cluster (EC3) - http://www.grycap.upv.es/ec3"
 RUN apt-get update && apt-get install -y \
-    git \
     nmap \
     python-ply \
     python-dev \
