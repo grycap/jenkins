@@ -4,7 +4,7 @@ system front (
     disk.0.os.name = 'linux' and
     disk.0.image.url = 'one://ramses.i3m.upv.es/95' and
     disk.0.os.credentials.username = 'ubuntu' and
-    disk.0.os.credentials.password = 'yoyoyo' and
+    disk.0.os.credentials.password = 'yoyoyo'
 )
 
 system wn (
@@ -15,5 +15,5 @@ system wn (
     disk.0.os.name = 'linux' and
     disk.0.image.url = 'one://ramses.i3m.upv.es/95' and
     disk.0.os.credentials.username = 'ubuntu' and
-    disk.0.os.credentials.password = 'yoyoyo'  and
+    disk.0.os.credentials.password = 'yoyoyo'
 )
