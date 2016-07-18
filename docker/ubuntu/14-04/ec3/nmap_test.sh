@@ -6,14 +6,17 @@ UDP_PORTS=(111 1023 2046 2047 2048 2049 1194 6444 6445 15001 15002 15003 15004)
 OPEN_PORTS=()
 
 # Create EC3 cluster 
+echo "Launching cluster"
 cd /opt/ec3
 HOST=$(./ec3 launch myjenkinscluster slurm nfs ubuntu14-ramses -a auth.dat -u http://servproject.i3m.upv.es:8899 -y | grep "IP" | awk 'BEGIN {FS=" "}{print $7}' | awk 'BEGIN {FS="F"}{print $1}' )
+echo "Cluster successfully created"
 
 if [ "$HOST" == "" ];then
     echo "Error obtaining front IP"
     exit -1
 fi
 
+echo "Analyzing open ports"
 # Call nmap
 nmap --open -n -p1-65535 $HOST | sed -rn 's/^([0-9]+)\/tcp.*open.*/\1/p' | while read port; do echo $port >> $FILE; done
 
@@ -38,6 +41,8 @@ for p in ${OPEN_PORTS[@]}; do
     fi
 done
 
+echo "Deleting cluster"
 rm $FILE
 ./ec3 destroy myjenkinscluster -y --force
+echo "Cluster successfully deleted"
 exit 0
