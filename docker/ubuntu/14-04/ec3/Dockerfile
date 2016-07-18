@@ -16,9 +16,6 @@ ENV EC3_HOME /opt/ec3
 RUN mkdir -p "$EC3_HOME"
 WORKDIR $EC3_HOME
 RUN git clone https://github.com/grycap/ec3.git $EC3_HOME
-COPY nmap_test.sh /opt/nmap_test.sh
 
 # Set jenkins user as owner of the ec3 app
 RUN sudo chown -R 1001:1001 /opt/
-USER jenkins
-RUN chmod +x /opt/nmap_test.sh
