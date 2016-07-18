@@ -2,7 +2,7 @@
 
 mv *.yaml /opt/tosca-parser/toscaparser/tests/data/indigo/examples/
 
-# Check syntax
+# Check codestyle
 cd /opt/tosca-parser/
 tox -e pep8
 
