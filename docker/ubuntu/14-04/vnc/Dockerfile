@@ -4,8 +4,8 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
 # Update and install all the necessary packages
 RUN apt-get update && apt-get install -y \
+    vnc4server \
     x11vnc \
-    xvfb \
     firefox \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -24,4 +24,4 @@ RUN wget https://download-installer.cdn.mozilla.net/pub/firefox/releases/45.2.0e
 # Start vnc display when the container is launched
 ADD start_vnc.sh /start_vnc.sh
 RUN chmod +x /start_vnc.sh
-CMD ["/start_vnc.sh"] 
+CMD ["/start_vnc.sh"]
