@@ -1,0 +1,8 @@
+# OpenNebula Cluster
+instance.front.cpu = 2
+instance.front.mem = 512
+instance.wn.cpu = 1
+instance.wn.mem = 256
+operative.system = Ubuntu 14.04
+lrms = Mesos (with Marathon and Chronos)
+maximum.nodes = 10
