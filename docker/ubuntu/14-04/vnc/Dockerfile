@@ -14,3 +14,8 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir ~/.vnc \
  && touch ~/.vnc/passwd \
  && x11vnc -storepasswd "fakepwd123" ~/.vnc/passwd
+ 
+# Start vnc display when the container is launched
+ADD start_vnc.sh /start_vnc.sh
+RUN chmod +x /start_vnc.sh
+CMD ["/start_vnc.sh"] 
