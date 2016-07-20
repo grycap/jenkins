@@ -15,6 +15,7 @@ RUN wget https://download-installer.cdn.mozilla.net/pub/firefox/releases/45.2.0e
  && tar -xvjf firefox-45.2.0esr.tar.bz2 -C /opt \
  && mv /usr/bin/firefox /usr/bin/firefox-old \
  && sudo ln -s /opt/firefox/firefox /usr/bin/firefox
+ && rm /firefox-45.2.0esr.tar.bz2
 
 # Create vnc folders and files
 USER jenkins
