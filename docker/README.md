@@ -31,7 +31,8 @@ ___
 * clues-indigo: Container used in the clues-indigo testing
 * java8: Container with latest version of Java 8
 * maven: Container with latest version of Maven
-* selenium: Container with VncServer for headless selenium testing
+* vnc: Container with VncServer and firefox for headless selenium testing
+* ec3: Container with the [ec3](http://servproject.i3m.upv.es/ec3/) software for cluster deployment and testing
 
 #### Container inheritance
 * base
@@ -42,4 +43,5 @@ ___
       * tosca
     * java8
       * maven
-        * selenium
+        * vnc
+    * ec3
