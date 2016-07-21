@@ -42,7 +42,7 @@ for p in ${OPEN_PORTS[@]}; do
 done
 
 echo "Deleting cluster"
-rm $FILE
+rm /opt/ec3/$FILE
 ./ec3 destroy myjenkinscluster -y --force
 echo "Cluster successfully deleted"
 exit 0
