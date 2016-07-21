@@ -6,6 +6,9 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 RUN yum -y update && yum install -y \
     sudo \
     rpm-build \
+    epel-release \
+    wget \
+    which \
  && yum clean all
 
 # Add jenkins user/group
