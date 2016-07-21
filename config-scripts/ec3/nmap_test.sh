@@ -37,6 +37,7 @@ for p in ${OPEN_PORTS[@]}; do
         continue
     else
         echo "Warning! Port $p is unexpectedly open!"
+        ./ec3 destroy myjenkinscluster -y --force
         exit -1
     fi
 done
