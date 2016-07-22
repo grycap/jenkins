@@ -1,6 +1,6 @@
 #!/bin/bash
 FILE="aux.txt"
-
+PACKAGES="${@:1}"
 TCP_PORTS=(22 80 111 2046 2047 2048 2049 9618 8899 5050 2181 2888 3888 4400 8080 6444 6445 6818 6817 2375 8500 4000 2376 7946 3375 15001 15002 15003 15004 1023 8800)
 UDP_PORTS=(111 1023 2046 2047 2048 2049 1194 6444 6445 15001 15002 15003 15004)
 OPEN_PORTS=()
@@ -8,7 +8,7 @@ OPEN_PORTS=()
 # Create EC3 cluster 
 echo "Launching cluster"
 cd /opt/ec3
-HOST=$(./ec3 launch myjenkinscluster slurm nfs ubuntu14-ramses -a auth.dat -u http://servproject.i3m.upv.es:8899 -y | grep "IP" | awk 'BEGIN {FS=" "}{print $7}' | awk 'BEGIN {FS="F"}{print $1}' )
+HOST=$(./ec3 launch myjenkinscluster $PACKAGES ubuntu14-ramses -a auth.dat -u http://servproject.i3m.upv.es:8899 -y | grep "IP" | awk 'BEGIN {FS=" "}{print $7}' | awk 'BEGIN {FS="F"}{print $1}' )
 echo "Cluster successfully created"
 
 if [ "$HOST" == "" ];then
@@ -37,12 +37,13 @@ for p in ${OPEN_PORTS[@]}; do
         continue
     else
         echo "Warning! Port $p is unexpectedly open!"
+        ./ec3 destroy myjenkinscluster -y --force
         exit -1
     fi
 done
 
 echo "Deleting cluster"
-rm $FILE
+rm /opt/ec3/$FILE
 ./ec3 destroy myjenkinscluster -y --force
 echo "Cluster successfully deleted"
 exit 0

@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 RUN wget https://download-installer.cdn.mozilla.net/pub/firefox/releases/45.2.0esr/linux-x86_64/en-US/firefox-45.2.0esr.tar.bz2 \
  && tar -xvjf firefox-45.2.0esr.tar.bz2 -C /opt \
  && mv /usr/bin/firefox /usr/bin/firefox-old \
- && sudo ln -s /opt/firefox/firefox /usr/bin/firefox
+ && sudo ln -s /opt/firefox/firefox /usr/bin/firefox \
  && rm /firefox-45.2.0esr.tar.bz2
 
 # Create vnc folders and files
@@ -22,10 +22,3 @@ USER jenkins
 RUN mkdir ~/.vnc \
  && touch ~/.vnc/passwd \
  && x11vnc -storepasswd "fakepwd123" ~/.vnc/passwd
-USER root
-
-# Start vnc display when the container is launched
-ADD start_vnc.sh /start_vnc.sh
-RUN chmod +x /start_vnc.sh
-ENV DISPLAY :10
-CMD ["/start_vnc.sh"] 

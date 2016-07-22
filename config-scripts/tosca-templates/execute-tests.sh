@@ -1,6 +1,6 @@
 #!/bin/bash
-
-mv *.yaml /opt/tosca-parser/toscaparser/tests/data/indigo/examples/
+# Move all the files from the tosca-templates repo (current directory) to the examples folder
+mv * /opt/tosca-parser/toscaparser/tests/data/indigo/examples/
 
 # Check codestyle
 cd /opt/tosca-parser/
