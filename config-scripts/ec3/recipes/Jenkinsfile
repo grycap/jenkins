@@ -1,0 +1,27 @@
+node('docker'){
+
+    def recipes = ['ubuntu14-ramses', 'centos7-ramses']
+    def lrmss = ['torque', 'slurm', 'mesos', 'sge', 'htcondor', 'swarm']
+
+    docker.image('grycap/jenkins:ubuntu14.04-ec3').inside {
+
+        stage 'Prepare environment'
+        env.github = 'https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/ec3'
+        env.ws = '/opt/ec3'
+        sh 'wget $github/recipes/ubuntu14-ramses.radl -O $ws/templates/ubuntu14-ramses.radl'
+        sh 'wget $github/recipes/centos7-ramses.radl -O $ws/templates/centos7-ramses.radl'
+        sh 'wget $github/recipes/test.sh -O $ws/test.sh'
+        sh 'chmod +x $ws/test.sh'
+
+        for (lrms in lrmss){
+            for (recipe in recipes){
+                env.LRMS = lrms
+                env.RECIPE = recipe
+                stage "Launch '${recipe}' recipe with '${lrms}'"
+                withCredentials([[$class: 'FileBinding', credentialsId: "${AUTH_FILE_ID}", variable: 'AUTH_FILE']]) {
+                    sh 'cd $ws && ./nmap_test.sh $LRMS $RECIPE $AUTH_FILE'
+                }
+            }
+        }
+    }
+}

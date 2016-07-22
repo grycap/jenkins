@@ -1,0 +1,19 @@
+## Centos 7
+
+system front (
+    disk.0.os.name = 'linux' and
+    disk.0.image.url = 'one://ramses.i3m.upv.es/221' and
+    disk.0.os.credentials.username = 'root' and
+    disk.0.os.credentials.password = 'grycap01'
+)
+
+system wn (
+    ec3_max_instances = 5 and
+    cpu.arch='x86_64' and
+    cpu.count>=1 and
+    memory.size>=1280m and
+    disk.0.os.name = 'linux' and
+    disk.0.image.url = 'one://ramses.i3m.upv.es/221' and
+    disk.0.os.credentials.username = 'root' and
+    disk.0.os.credentials.password = 'grycap01'
+) 
