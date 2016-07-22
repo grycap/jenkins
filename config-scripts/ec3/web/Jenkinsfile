@@ -1,0 +1,38 @@
+node('docker'){
+    docker.image('grycap/jenkins:ubuntu14.04-vnc').inside {
+        stage 'Checkout svn'
+        checkout([
+            $class: 'SubversionSCM',
+            filterChangelog: false,
+            ignoreDirPropChanges: false,
+            locations: [[
+                credentialsId: "${SVN_CREDS_ID}",
+                depthOption: 'infinity',
+                ignoreExternalsOption: true,
+                local: '.',
+                remote: 'https://src-grycap.i3m.upv.es/svn/indigo/trunk/selenium-ec3'
+            ]],
+            workspaceUpdater: [
+                $class: 'UpdateUpdater'
+            ]
+        ])
+
+        stage 'Prepare environment'
+        env.rfolder = '/home/jenkins/resources'
+        env.github = 'https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/ec3/web'
+        env.vnc = ':0 -localhost -nolisten tcp'
+        env.auth = '-Dauth.file.path=$AUTH_FILE'
+        env.resources = '-Dresources.folder.path=$rfolder/'
+        sh 'curl $github/open-nebula/basic-cluster --create-dirs -o $rfolder/open-nebula/one-basic-cluster'
+
+        stage 'Launch Tests'
+        withCredentials([[$class: 'FileBinding', credentialsId: "${AUTH_FILE_ID}", variable: 'AUTH_FILE']]) {
+            sh 'DISPLAY=:0 && export DISPLAY && vncserver $vnc && mvn clean test $auth $resources'
+        }
+        stash includes: 'target/**', name: 'tests'
+    }
+
+    stage 'Publish Tests'
+    unstash 'tests'
+    step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
+}
