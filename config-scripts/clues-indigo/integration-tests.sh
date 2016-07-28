@@ -7,6 +7,7 @@ cd /opt/ec3/
 ./ec3 launch $NAME mesos docker ubuntu14-ramses -a $AUTH_FILE -u http://servproject.i3m.upv.es:8899 -y
 # Get cluster IP
 HOST_IP=$(./ec3 list | grep $NAME | awk '{print $3}')
+sleep 5
 # Create marathon task
 cat >> mysql.json << EOT
 {
@@ -34,16 +35,19 @@ EOT
 echo 'SENDING MARATHON TASK'
 http POST http://$HOST_IP:8080/v2/apps < mysql.json
 echo 'MARATHON TASK SENT'
-# Check if task is recieved
+sleep 5
+
 echo 'CHECKING IF MARATHON RECEIVES THE TASK'
 http GET http://$HOST_IP:8080/v2/apps?embed=tasks -b | jq '.apps[0].id' | grep mysql
 echo 'MARATHON TASK RECEIVED SUCCESFULLY'
-# Check if the marathon task is running
+sleep 5
+
+echo 'WAITING FOR MARATHON TASK TO DEPLOY'
 TASK_STATE=$(http GET http://$HOST_IP:8080/v2/apps?embed=tasks -b | jq '.apps[0].tasks[0].state' | grep -c RUNNING)
 while [[ $TASK_STATE -ne 1 ]]; do
   sleep 20
   TASK_STATE=$(http GET http://$HOST_IP:8080/v2/apps?embed=tasks -b | jq '.apps[0].tasks[0].state' | grep -c RUNNING)
-  echo 'WATING FOR MARATHON TASK TO DEPLOY'
+  echo 'WAITING FOR MARATHON TASK TO DEPLOY'
 done
 echo 'MARATHON TASK RUNNING'
 # Destroy the cluster
