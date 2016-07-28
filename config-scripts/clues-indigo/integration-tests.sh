@@ -33,7 +33,9 @@ cat >> mysql.json << EOT
 EOT
 echo 'SENDING MARATHON TASK'
 http POST http://$HOST_IP:8080/v2/apps < mysql.json
+echo 'MARATHON TASK SENT'
 # Check if task is recieved
+echo 'CHECKING IF MARATHON RECEIVES THE TASK'
 http GET http://$HOST_IP:8080/v2/apps?embed=tasks -b | jq '.apps[0].id' | grep mysql
 echo 'MARATHON TASK RECEIVED SUCCESFULLY'
 # Check if the marathon task is running
