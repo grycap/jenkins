@@ -3,7 +3,7 @@
 CLUSTER_IP=$1
 
 function get_marathon_tasks() {
-  echo $(http GET http://$CLUSTER_IP:8080/v2/apps?embed=tasks -b)
+  echo $(curl -X GET http://$CLUSTER_IP:8080/v2/apps?embed=tasks)
 }
 
 function get_marathon_task_state() {
