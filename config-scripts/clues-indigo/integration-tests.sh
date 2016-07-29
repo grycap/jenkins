@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash +x
 NAME=$1
 AUTH_FILE=$2
 # Set working directory
@@ -33,20 +33,24 @@ cat >> mysql.json << EOT
 }
 EOT
 echo 'SENDING MARATHON TASK'
-http POST http://$HOST_IP:8080/v2/apps < mysql.json
+http POST http://$HOST_IP:8080/v2/apps < mysql.json &> /dev/null
 echo 'MARATHON TASK SENT'
 sleep 5
 
+function get_marathon_tasks() {
+  return http GET http://$HOST_IP:8080/v2/apps?embed=tasks -b
+}
+
 echo 'CHECKING IF MARATHON RECEIVES THE TASK'
-http GET http://$HOST_IP:8080/v2/apps?embed=tasks -b | jq '.apps[0].id' | grep mysql
+echo get_marathon_tasks | jq '.apps[0].id' | grep mysql &> /dev/null
 echo 'MARATHON TASK RECEIVED SUCCESFULLY'
 sleep 5
 
 echo 'WAITING FOR MARATHON TASK TO DEPLOY'
-TASK_STATE=$(http GET http://$HOST_IP:8080/v2/apps?embed=tasks -b | jq '.apps[0].tasks[0].state' | grep -c RUNNING)
+TASK_STATE=$(get_marathon_tasks | jq '.apps[0].tasks[0].state' | grep -c RUNNING)
 while [[ $TASK_STATE -ne 1 ]]; do
   sleep 20
-  TASK_STATE=$(http GET http://$HOST_IP:8080/v2/apps?embed=tasks -b | jq '.apps[0].tasks[0].state' | grep -c RUNNING)
+  TASK_STATE=$(get_marathon_tasks | jq '.apps[0].tasks[0].state' | grep -c RUNNING)
   echo 'WAITING FOR MARATHON TASK TO DEPLOY'
 done
 echo 'MARATHON TASK RUNNING'
