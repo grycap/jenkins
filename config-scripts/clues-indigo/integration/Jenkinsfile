@@ -1,0 +1,24 @@
+node('docker') {
+
+    docker.image('grycap/jenkins:ubuntu14.04-clues-indigo-ec3').inside {
+        stage 'Prepare environment'
+        withEnv(['GITHUB=https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/clues-indigo/integration']) {
+            sh 'curl -X GET $GITHUB/launch-ec3-cluster.sh > launch-ec3-cluster.sh'
+            sh 'curl -X GET $GITHUB/get-ec3-cluster-ip.sh > get-ec3-cluster-ip.sh'
+            sh 'curl -X GET $GITHUB/launch-marathon-task.sh > launch-marathon-task.sh'
+            sh 'curl -X GET $GITHUB/destroy-ec3-cluster.sh > destroy-ec3-cluster.sh'
+            sh 'chmod +x *.sh'
+        }
+
+        stage 'Launch cluster'
+        withCredentials([[$class: 'FileBinding', credentialsId: "${AUTH_FILE_ID}", variable: 'AUTH_FILE']]) {
+            sh './launch-ec3-cluster.sh cluestest $AUTH_FILE'
+        }
+
+        stage 'Launch marathon tests'
+        sh 'IP=$(./get-ec3-cluster-ip.sh cluestest) && ./launch-marathon-task.sh $IP'
+
+        stage 'Destroy cluster'
+        sh './destroy-ec3-cluster.sh cluestest'
+    }
+}
