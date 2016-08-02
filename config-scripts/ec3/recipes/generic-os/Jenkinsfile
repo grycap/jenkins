@@ -1,0 +1,24 @@
+node('docker'){
+
+    def lrmss = ['torque', 'slurm', 'mesos', 'sge', 'htcondor', 'swarm']
+
+    docker.image('grycap/jenkins:ubuntu14.04-ec3').inside {
+
+        stage 'Prepare environment'
+        env.GITHUB = 'https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/ec3'
+        env.WS = '/opt/ec3'
+        env.RECIPE = "${OS}"
+
+        sh 'wget $GITHUB/recipes/$RECIPE.radl -O $WS/templates/$RECIPE.radl'
+        sh 'wget $GITHUB/recipes/test.sh -O $WS/test.sh'
+        sh 'chmod +x $WS/test.sh'
+
+        for (lrms in lrmss){
+            env.LRMS = lrms
+            stage "Launch '${OS}' with '${lrms}'"
+            withCredentials([[$class: 'FileBinding', credentialsId: "${AUTH_FILE_ID}", variable: 'AUTH_FILE']]) {
+                sh 'cd $WS && ./test.sh $LRMS $RECIPE $AUTH_FILE'
+            }
+        }
+    }
+}
