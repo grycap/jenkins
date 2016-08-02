@@ -1,0 +1,31 @@
+node('docker'){
+
+    def lrmss = [
+        'torque',
+        'slurm',
+        //'mesos',
+        'sge',
+        'htcondor',
+        'swarm'
+    ]
+
+    docker.image('grycap/jenkins:ubuntu14.04-ec3').inside {
+
+        stage 'Prepare environment'
+        env.github = 'https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/ec3'
+        env.ws = '/opt/ec3'
+
+        sh 'wget $github/recipes/ubuntu14-ramses.radl -O $ws/templates/ubuntu14-ramses.radl'
+        sh 'wget $github/ports/nmap_test.sh -O $ws/nmap_test.sh'
+        sh 'chmod +x $ws/nmap_test.sh'
+        withCredentials([[$class: 'FileBinding', credentialsId: "${AUTH_FILE_ID}", variable: 'AUTH_FILE']]) {
+            sh 'cat $AUTH_FILE > $ws/auth.dat'
+        }
+
+        for (lrms in lrmss){
+            env.LRMS = lrms
+            stage "Launch cluster with lrms: ${lrms}"
+            sh 'cd $ws && ./nmap_test.sh $LRMS'
+        }
+    }
+}
