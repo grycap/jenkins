@@ -6,7 +6,8 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 RUN apk update && apk upgrade && apk add \
     sudo \
     curl \
-    wget
+    wget \
+    bash
 
 RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
