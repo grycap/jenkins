@@ -1,2 +1,8 @@
-# Execute tests
-nosetests -v test/unit/connectors/*.py test/unit/*.py --with-timer --timer-no-color --with-xunit --with-coverage --cover-erase --cover-html --cover-package=IM
+#!/bin/bash
+TESTS=test/unit/connectors/*.py test/unit/*.py test/functional/*.py
+BASIC_PARAM=-v --stop
+XUNIT=--with-xunit
+TIMER=--with-timer --timer-no-color
+COVERAGE=--with-coverage --cover-erase --cover-html --cover-package=IM
+
+nosetests $TESTS $BASIC_PARAM $XUNIT $TIMER $COVERAGE
