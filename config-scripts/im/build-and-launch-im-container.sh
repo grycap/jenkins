@@ -9,7 +9,7 @@ cd $1/docker-devel
 docker build -t $2 --no-cache -f Dockerfile .
 
 # Start container
-docker run -d -P --name $2 $3
+docker run -d -P --name $3 $2
 
 # Wait for the container
 sleep 10
