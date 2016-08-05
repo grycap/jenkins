@@ -13,6 +13,7 @@ RUN apk add \
   py-netaddr \
   ansible \
   procps \
+  jq \  
   --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 RUN pip install scp apache-libcloud soappy mock bottle nose-timer
