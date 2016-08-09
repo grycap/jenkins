@@ -2,4 +2,4 @@
 WORKSPACE=$1
 
 cd $WORKSPACE
-nosetests -v test/integration/QuickTestIM.py test/integration/TestREST.py --with-timer --timer-no-color --with-xunit --with-coverage --cover-erase --cover-html --cover-package=IM
+nosetests test/integration/TestIM.py test/integration/TestREST.py test/integration/TestREST_JSON.py -v --stop --with-xunit --with-timer --timer-no-color --with-coverage --cover-erase --cover-xml --cover-package=IM
