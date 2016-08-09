@@ -15,4 +15,4 @@ curl -s $GITHUB_URL/build-and-launch-im-container.sh | bash -s $WORKSPACE $NAME_
 curl -s $GITHUB_URL/disable-ipv6-ansible.sh | bash -s $WORKSPACE
 
 # Configure tests ports
-curl -s $GITHUB_URL/configure-ports.sh | bash -s $NAME_ID $IMAGE_ID
+curl -s $GITHUB_URL/configure-ports.sh | bash -s $WORKSPACE $NAME_ID
