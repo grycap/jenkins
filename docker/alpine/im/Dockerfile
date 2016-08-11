@@ -13,7 +13,7 @@ RUN apk add \
   py-netaddr \
   ansible \
   procps \
-  jq \  
+  jq \
   --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 RUN pip install scp apache-libcloud soappy mock bottle nose-timer
@@ -25,3 +25,9 @@ RUN git clone https://github.com/grycap/RADL /home/jenkins/RADL \
  && rm /usr/lib/python2.7/site-packages/RADL-1.0.2-py2.7.egg \
  && mkdir -p /usr/lib/python2.7/site-packages/RADL-1.0.2-py2.7.egg \
  && mv * /usr/lib/python2.7/site-packages/RADL-1.0.2-py2.7.egg/
+
+# Install tosca-parser
+RUN cd tmp \
+ && git clone --recursive https://github.com/indigo-dc/tosca-parser.git \
+ && cd tosca-parser \
+ && pip install /tmp/tosca-parser
