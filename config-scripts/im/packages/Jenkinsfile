@@ -1,0 +1,52 @@
+#!groovy
+
+stage 'Generate Packages'
+parallel 'centos7': {
+    node('docker') {
+        docker.image('grycap/jenkins:centos7-git').inside {
+            git 'https://github.com/grycap/im'
+            sh 'sudo ./packages/generate_rpm.sh 1.el7'
+            sh 'sudo chown -R jenkins:jenkins dist_pkg'
+            stash includes: 'dist_pkg/*', name: 'rpm'
+        }
+    }
+}, 'ubuntu14.04': {
+    node('docker') {
+        docker.image('grycap/jenkins:ubuntu14.04-git').inside {
+            git 'https://github.com/grycap/im'
+            sh 'sudo ./packages/generate_deb.sh'
+            sh 'sudo chown -R jenkins:jenkins dist_pkg'
+            stash includes: 'dist_pkg/*', name: 'deb'
+        }
+    }
+}, failFast: true
+
+stage 'Check pkg installation'
+parallel 'centos7': {
+    node('docker') {
+        docker.image('grycap/jenkins:centos7-git').inside {
+            unstash 'rpm'
+            sh 'wget https://github.com/grycap/RADL/releases/download/v1.0.2/RADL-1.0.2-1.el7.noarch.rpm'
+            sh 'sudo yum update -y'
+            sh 'sudo yum localinstall -y dist/*.noarch.rpm *.rpm'
+            sh 'which im_service.py'
+            archive 'dist_pkg/*.noarch.rpm'
+        }
+    }
+}, 'ubuntu14.04': {
+    node('docker') {
+        docker.image('grycap/jenkins:ubuntu14.04-git').inside {
+            unstash 'deb'
+            sh 'ls -la'
+            sh 'wget http://archive.ubuntu.com/ubuntu/pool/universe/b/backports.ssl-match-hostname/python-backports.ssl-match-hostname_3.4.0.2-1_all.deb'
+            sh 'wget http://archive.ubuntu.com/ubuntu/pool/universe/p/python-scp/python-scp_0.10.2-1_all.deb'
+            sh 'wget http://archive.ubuntu.com/ubuntu/pool/universe/libc/libcloud/python-libcloud_0.20.0-1_all.deb'
+            sh 'wget https://github.com/grycap/RADL/releases/download/v1.0.2/python-radl_1.0.2-1_all.deb'
+            sh 'sudo apt update'
+            sh 'sudo dpkg -i dist_pkg/*.deb *.deb || echo "OK"'
+            sh'sudo apt install -f -y'
+            sh 'which im_service.py'
+            archive 'dist_pkg/*.deb'
+        }
+    }
+}, failFast: true
