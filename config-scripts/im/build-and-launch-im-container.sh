@@ -12,7 +12,7 @@ cd $WORKSPACE/docker-devel
 docker build -t $IMAGE_ID --no-cache -f Dockerfile .
 
 # Start container
-docker run -d -P --name $NAME_ID $IMAGE_ID
+docker run -dP --name $NAME_ID $IMAGE_ID
 
 # Wait for the container
 sleep 10

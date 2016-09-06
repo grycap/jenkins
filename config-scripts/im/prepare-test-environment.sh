@@ -14,5 +14,8 @@ curl -s $GITHUB_URL/build-and-launch-im-container.sh | bash -s $WORKSPACE $NAME_
 # Disable IPv6 in test machines
 curl -s $GITHUB_URL/disable-ipv6-ansible.sh | bash -s $WORKSPACE
 
+# Configure container IP
+curl -s $GITHUB_URL/configure-ip.sh | bash -s $WORKSPACE
+
 # Configure tests ports
 curl -s $GITHUB_URL/configure-ports.sh | bash -s $WORKSPACE $NAME_ID
