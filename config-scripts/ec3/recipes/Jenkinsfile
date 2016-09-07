@@ -3,6 +3,6 @@ node {
 
     for (recipe in recipes){
         stage "Launching ${recipe}"
-        build job: 'ec3/ec3-generic-os-recipes', parameters: [string(name: 'OS', value: "${recipe}"), string(name: 'AUTH_FILE_ID', value: "${AUTH_FILE_ID}")]
+        build job: 'grycap/ec3-generic-os-recipes', parameters: [string(name: 'OS', value: "${recipe}"), string(name: 'AUTH_FILE_ID', value: "${AUTH_FILE_ID}")]
     }
 }
