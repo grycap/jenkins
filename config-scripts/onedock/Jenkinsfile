@@ -38,7 +38,7 @@ node('lxc') {
     parallel 'centos7': {
         node('docker') {
             docker.image('grycap/jenkins:centos7-git').inside {
-                git branch: 'packaging', url: 'https://github.com/indigo-dc/onedock.git'
+                git url: 'https://github.com/indigo-dc/onedock.git'
                 sh 'cd packaging/rpm && ./build-rpm.sh -f ../../'
                 archive 'packaging/rpm/dist/RPMS/noarch/*'
             }
@@ -46,7 +46,7 @@ node('lxc') {
     }, 'ubuntu14.04': {
         node('docker') {
             docker.image('grycap/jenkins:ubuntu14.04-git').inside {
-                git branch: 'packaging', url: 'https://github.com/indigo-dc/onedock.git'
+                git url: 'https://github.com/indigo-dc/onedock.git'
                 sh 'cd packaging/debian && ./build-dev.sh -f ../../'
                 archive 'packaging/debian/dist/*'
             }
