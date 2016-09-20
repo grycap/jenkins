@@ -9,13 +9,13 @@ RUN apk update && apk upgrade && apk add \
     wget \
     bash
 
-RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+RUN echo "@community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
-RUN apk -U add shadow@testing
+RUN apk -U add shadow@community
 
 # Add jenkins user/group
 RUN groupadd -g 1001 jenkins \
-&& useradd -m -d /home/jenkins -s /bin/bash -g jenkins -u 1001 jenkins
+ && useradd -m -d /home/jenkins -s /bin/bash -g jenkins -u 1001 jenkins
 
 RUN gpasswd -a jenkins wheel
 
@@ -24,3 +24,7 @@ RUN sed -i.bkp -e 's/#\s%wheel.*NOPASSWD.*/%wheel ALL=(ALL) NOPASSWD: ALL/g' /et
 
 # Fix issue: 'sudo: sorry, you must have a tty to run sudo'
 RUN sed -i.bkp -e 's/Defaults.*requiretty.*/# Defaults requiretty/g' /etc/sudoers
+
+# Add jenkins to the docker group
+RUN groupadd docker \
+ && usermod -aG docker jenkins
