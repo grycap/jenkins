@@ -6,6 +6,7 @@ LABEL description="Elastic Cloud Computing Cluster (EC3) - http://www.grycap.upv
 RUN apt-get update && apt-get install -y \
     nmap \
     wget \
+    sshpass \
     python-ply \
     python-dev \
     python-yaml \
