@@ -10,4 +10,4 @@ tox -e pep8
 nosetests toscaparser/tests/test_indigo.py --with-xunit --xunit-file junit.xml
 
 # Save tests output
-mv junit.xml /home/jenkins/workspace/tosca-templates/
+mv junit.xml /home/jenkins/workspace/indigo/tosca-templates/
