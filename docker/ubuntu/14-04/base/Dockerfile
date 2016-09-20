@@ -4,9 +4,9 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
 # Update and install all the necessary packages
 RUN apt-get update && apt-get install -y \
-    wget \    
+    wget \
     curl \
-    httpie \    
+    httpie \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -17,6 +17,4 @@ RUN groupadd -g 1001 jenkins \
 RUN adduser jenkins sudo
 
 # Enable passwordless sudo for users under the "sudo" group
-RUN sed -i.bkp -e \
-      's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' \
-/etc/sudoers
+RUN sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
