@@ -15,7 +15,7 @@ RUN apk add --no-cache \
 
 # Add jenkins user/group
 RUN groupadd -g 1001 jenkins \
- && useradd -m -d /home/jenkins -s /bin/bash -g jenkins -u 1001 jenkins
+ && useradd -m -d /home/jenkins -s /bin/bash -g jenkins -u 1001 jenkins \
  && gpasswd -a jenkins wheel
 
 # Enable passwordless sudo for users under the "wheel" group
