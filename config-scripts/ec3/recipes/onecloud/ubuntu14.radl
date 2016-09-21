@@ -1,0 +1,19 @@
+## Ubuntu 14.04
+
+system front (
+    disk.0.os.name = 'linux' and
+    disk.0.image.url = 'one://onecloud.i3m.upv.es/77' and
+    disk.0.os.credentials.username = 'ubuntu' and
+    disk.0.os.credentials.password = 'yoyoyo'
+)
+
+system wn (
+    ec3_max_instances = 5 and
+    cpu.arch='x86_64' and
+    cpu.count>=1 and
+    memory.size>=1024m and
+    disk.0.os.name = 'linux' and
+    disk.0.image.url = 'one://onecloud.i3m.upv.es/77' and
+    disk.0.os.credentials.username = 'ubuntu' and
+    disk.0.os.credentials.password = 'yoyoyo'
+)
