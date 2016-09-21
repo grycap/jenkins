@@ -2,7 +2,7 @@ node('docker'){
 
     def lrmss = ['torque', 'slurm', 'mesos', 'sge', 'htcondor', 'swarm']
 
-    docker.image('grycap/jenkins:ubuntu14.04-ec3').inside {
+    docker.image('grycap/jenkins:ec3').inside {
 
         stage 'Prepare environment'
         env.GITHUB = 'https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/ec3'
