@@ -15,10 +15,9 @@ RUN apk add --no-cache \
   procps \
   jq \
   pep8@testing \
-  py-coverage@testing \
-  py-netaddr@community
+  py-coverage@testing
 
-RUN pip install scp apache-libcloud soappy mock bottle nose-timer
+RUN pip install scp netaddr apache-libcloud soappy mock bottle nose-timer
 
 # Install RADL lib
 RUN git clone https://github.com/grycap/RADL /home/jenkins/RADL \
