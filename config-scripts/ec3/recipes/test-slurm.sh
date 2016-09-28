@@ -19,8 +19,9 @@ JOB3=$(sbatch test.sh | awk '{print $4}')
 echo "Job $JOB3 finished"
 sleep 10
 
-echo "Job outputs"
 #cat slurm-$JOB1.out
+echo "Job $JOB2 output"
 cat slurm-$JOB2.out
+echo "Job $JOB3 output"
 cat slurm-$JOB3.out
 exit
