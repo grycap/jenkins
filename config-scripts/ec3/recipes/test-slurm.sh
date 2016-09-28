@@ -20,7 +20,7 @@ echo "Job $JOB3 finished"
 sleep 10
 
 echo "Job outputs"
-cat slurm-$JOB1.out
+#cat slurm-$JOB1.out
 cat slurm-$JOB2.out
 cat slurm-$JOB3.out
 exit

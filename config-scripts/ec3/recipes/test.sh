@@ -22,6 +22,7 @@ SSHPASS=$(echo $EC3SSH | awk '{print $2}')
 SSHIP=$(echo $EC3SSH | awk '{print $8}')
 
 sshpass $SSHPASS scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $WORKSPACE/test-slurm.sh $SSHIP:/home/ubuntu
+$EC3SSH -l ubuntu "chmod +x test-slurm.sh"
 $EC3SSH -l ubuntu "./test-slurm.sh"
 
 echo "Deleting cluster"
