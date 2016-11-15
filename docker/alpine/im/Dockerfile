@@ -9,6 +9,7 @@ RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/re
 RUN apk add --no-cache \
   py-nose \
   py-boto \
+  py-mysqldb \
   gcc \
   py-pip \
   ansible \
