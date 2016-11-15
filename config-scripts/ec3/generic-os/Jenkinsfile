@@ -9,7 +9,7 @@ node('docker'){
         env.WS = '/opt/ec3'
         env.RECIPE = "${OS}"
 
-        sh 'wget $GITHUB/recipes/$RECIPE.radl -O $WS/templates/$RECIPE.radl'
+        sh 'wget $GITHUB/recipes/ramses/$RECIPE.radl -O $WS/templates/$RECIPE.radl'
         sh 'wget $GITHUB/recipes/test.sh -O $WS/test.sh'
         sh 'chmod +x $WS/test.sh'
 
