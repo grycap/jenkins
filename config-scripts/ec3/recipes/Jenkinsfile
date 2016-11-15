@@ -1,5 +1,5 @@
 node {
-    def recipes = ['ramses/ubuntu14', 'ramses/centos7']
+    def recipes = ['ubuntu14', 'centos7']
 
     for (recipe in recipes){
         stage "Launching ${recipe}"
