@@ -15,7 +15,7 @@ RUN apk add --no-cache \
   ansible \
   procps \
   jq \
-  pep8@testing \
+  py-pep8 \
   py-coverage@testing
 
 RUN pip install scp netaddr apache-libcloud soappy mock bottle nose-timer
@@ -23,10 +23,11 @@ RUN pip install scp netaddr apache-libcloud soappy mock bottle nose-timer
 # Install RADL lib
 RUN git clone https://github.com/grycap/RADL /home/jenkins/RADL \
  && cd /home/jenkins/RADL \
- && python setup.py install \
- && rm /usr/lib/python2.7/site-packages/RADL-1.0.2-py2.7.egg \
- && mkdir -p /usr/lib/python2.7/site-packages/RADL-1.0.2-py2.7.egg \
- && mv * /usr/lib/python2.7/site-packages/RADL-1.0.2-py2.7.egg/
+ && python setup.py install > install.out \
+ && RADL_PKG=$(cat install.out | grep "Processing RADL-.*" | awk '{print $2}') \
+ && rm /usr/lib/python2.7/site-packages/$RADL_PKG \
+ && mkdir -p /usr/lib/python2.7/site-packages/$RADL_PKG \
+ && mv * /usr/lib/python2.7/site-packages/$RADL_PKG/
 
 # Install tosca-parser
 RUN cd /tmp \
