@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     python-soappy \
     python-dateutil \
     python-mysqldb \
+    python-sqlite \
     openssh-client \
     sshpass \
     git \
