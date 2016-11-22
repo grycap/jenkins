@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     gcc \
     python-dev \
     python-pip \
-    python-soappy \
+    python-suds \
     python-dateutil \
     python-mysqldb \
     python-sqlite \
