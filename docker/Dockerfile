@@ -18,6 +18,9 @@ RUN groupadd -g 1001 jenkins \
  && useradd -m -d /home/jenkins -s /bin/bash -g jenkins -u 1001 jenkins \
  && gpasswd -a jenkins wheel
 
+# Enable jenkins to read/write in tmp folder
+RUN chown -R 1001:1001 /tmp
+
 # Enable passwordless sudo for users under the "wheel" group
 RUN sed -i.bkp -e 's/#\s%wheel.*NOPASSWD.*/%wheel ALL=(ALL) NOPASSWD: ALL/g' /etc/sudoers
 
