@@ -18,6 +18,7 @@ RUN apk add --no-cache \
   py-pep8 \
   python-dev \
   musl-dev \
+  libffi-dev \
   py-coverage@testing
 
 RUN pip install scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource
