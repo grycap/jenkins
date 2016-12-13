@@ -18,7 +18,7 @@ RUN apk add --no-cache \
   py-pep8 \
   py-coverage@testing
 
-RUN pip install scp netaddr apache-libcloud mock bottle nose-timer suds
+RUN pip install scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource
 
 # Install RADL lib
 RUN git clone https://github.com/grycap/RADL /home/jenkins/RADL \
