@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     curl \
     httpie \
+    software-properties-common \    
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
