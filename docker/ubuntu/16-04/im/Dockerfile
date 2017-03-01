@@ -18,8 +18,7 @@ RUN apt-get update && apt-get install -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-# Install CherryPy to enable HTTPS in REST API
+# Install cheroot to enable REST API
 RUN pip install setuptools --upgrade -I
 RUN pip install pbr pyOpenSSL --upgrade -I
-# Put version < 9 off cherrypy
-RUN pip install CherryPy==8.9.1 --upgrade -I
+RUN pip install cheroot
