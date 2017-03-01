@@ -9,6 +9,13 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-suds \
     python3-dateutil \
+    python3-scp \
+    python3-requests \
+    python3-netaddr \
+    python3-yaml \
+    python3-ply \
+    python3-paramiko \
+    python3-boto \
     libmysqld-dev \
     libsqlite3-dev \
     openssh-client \
@@ -22,3 +29,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install setuptools --upgrade -I
 RUN pip3 install pbr pyOpenSSL --upgrade -I
 RUN pip3 install cheroot
+RUN pip3 install RADL
+RUN pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource
+RUN pip3 install apache-libcloud
+RUN pip3 install ansible
