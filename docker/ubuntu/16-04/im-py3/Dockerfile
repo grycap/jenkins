@@ -35,3 +35,4 @@ RUN pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-c
 RUN pip3 install apache-libcloud
 RUN pip3 install ansible
 RUN pip3 install PyMySQL
+RUN pip3 install pywinrm
