@@ -8,5 +8,7 @@ RUN sudo apt-add-repository -y ppa:ansible/ansible
 # Update and install all the necessary packages
 RUN apt-get update && apt-get install -y \
     ansible \
+    vim \
+    nano \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
