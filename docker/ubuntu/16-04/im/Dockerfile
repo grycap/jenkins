@@ -22,3 +22,4 @@ RUN apt-get update && apt-get install -y \
 RUN pip install setuptools --upgrade -I
 RUN pip install pbr pyOpenSSL --upgrade -I
 RUN pip install cheroot
+RUN pip install pywinrm
