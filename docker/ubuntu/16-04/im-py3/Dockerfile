@@ -34,3 +34,4 @@ RUN pip3 install RADL
 RUN pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource
 RUN pip3 install apache-libcloud
 RUN pip3 install ansible
+RUN pip3 install PyMySQL
