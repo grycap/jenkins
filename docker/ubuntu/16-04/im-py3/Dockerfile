@@ -36,3 +36,4 @@ RUN pip3 install apache-libcloud
 RUN pip3 install ansible
 RUN pip3 install PyMySQL
 RUN pip3 install pywinrm
+RUN pip3 install tosca-parser
