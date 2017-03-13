@@ -8,7 +8,10 @@ RUN apt-get update && apt-get install -y \
     python-nose \
     python-mock \
     python-ply \
-    python-tox \
     python-coverage \
+    python-pip \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
+
+# Install new version of tox tool
+RUN pip install tox --upgrade -I
