@@ -41,4 +41,4 @@ RUN pip3 install tosca-parser
 RUN cd /tmp \
  && git clone https://github.com/grycap/RADL  \
  && cd RADL \
- && pip install /tmp/RADL
+ && pip3 install /tmp/RADL
