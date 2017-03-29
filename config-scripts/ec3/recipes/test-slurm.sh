@@ -4,6 +4,7 @@ cat >> test.sh << EOF
 #!/bin/bash
 date > date.out
 /bin/hostname
+date
 EOF
 chmod +x test.sh
 sleep 2

@@ -9,8 +9,8 @@ node('lxc') {
         stage 'Check for existing containers'
         sh 'curl -s $RAW_REPO_PATH/stop-destroy-existing-containers.sh | bash'
 
-        stage 'Create lxc with one4 container'
-        sh 'curl -s $RAW_REPO_PATH/create-lxc-container.sh | bash'
+        stage 'Create lxc with one5 container'
+        sh 'curl -s $RAW_REPO_PATH/create-lxc-one5-container.sh | bash'
 
         stage 'Onedatastore test'
         sh 'curl -s $RAW_REPO_PATH/functional-tests/001-onedatastore-test.sh | bash'

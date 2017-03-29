@@ -21,9 +21,16 @@ EC3SSH=$(./ec3 ssh myjenkinscluster --show-only)
 SSHPASS=$(echo $EC3SSH | awk '{print $2}')
 SSHIP=$(echo $EC3SSH | awk '{print $8}')
 
-sshpass $SSHPASS scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $WORKSPACE/test-slurm.sh $SSHIP:/home/ubuntu
-$EC3SSH -l ubuntu "chmod +x test-slurm.sh"
-$EC3SSH -l ubuntu "./test-slurm.sh"
+TEST_FOLDER=/home/ubuntu
+USER=ubuntu
+if [ $os = "centos7" ]; then
+  TEST_FOLDER=/root
+  USER=root
+fi
+
+sshpass $SSHPASS scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $WORKSPACE/test-slurm.sh $SSHIP:$TEST_FOLDER
+$EC3SSH -l $USER "chmod +x test-slurm.sh"
+$EC3SSH -l $USER "./test-slurm.sh"
 
 echo "Deleting cluster"
 ./ec3 destroy myjenkinscluster -y --force
