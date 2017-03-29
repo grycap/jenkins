@@ -5,7 +5,7 @@ cd install/lxc/
 
 sed -i 's/sleep 5/sleep 10/g' create-lxc
 
-sudo ./create-lxc onetest --create
+sudo ./create-lxc-one5 onetest --create
 
 # Give oneadmin sudo rights
 sudo lxc-attach -n onetest -- sudo adduser oneadmin sudo
