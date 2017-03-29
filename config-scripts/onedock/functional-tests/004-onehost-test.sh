@@ -1,5 +1,5 @@
 # Create one host
-sudo lxc-attach -n onetest -- onehost create "ubuntu" -i onedock -v onedock -n dummy
+sudo lxc-attach -n onetest -- onehost create "ubuntu" -i onedock -v onedock
 sleep 2
 
 # Check the host creation status
