@@ -3,7 +3,7 @@
 # First create the container
 cd install/lxc/
 
-sed -i 's/sleep 5/sleep 10/g' create-lxc
+sed -i 's/sleep 5/sleep 10/g' create-lxc-one5
 
 sudo ./create-lxc-one5 onetest --create
 
