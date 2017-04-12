@@ -3,7 +3,7 @@ sudo lxc-attach -n onetest -- bash -c 'cat > ubuntu-docker.tmpl << EOF
 NAME="ubuntu"
 PATH=docker://ubuntu:latest
 TYPE=OS
-DESCRIPTION="Ubuntu Trusty with SSHd"
+DESCRIPTION="Ubuntu"
 EOF'
 
 # Create the image
