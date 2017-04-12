@@ -4,34 +4,34 @@ node('lxc') {
     stage 'Check project'
     git url: 'https://github.com/indigo-dc/onedock.git'
 
-    withEnv(['RAW_REPO_PATH=https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/onedock']) {
+    withEnv(['TEST_REPO_PATH=https://raw.githubusercontent.com/indigo-dc/onedock/master/test']) {
 
         stage 'Check for existing containers'
-        sh 'curl -s $RAW_REPO_PATH/stop-destroy-existing-containers.sh | bash'
+        sh 'curl -s https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/onedock/stop-destroy-existing-containers.sh | bash -s one5test'
 
-        stage 'Create lxc with one5 container'
-        sh 'curl -s $RAW_REPO_PATH/create-lxc-one5-container.sh | bash'
+        stage 'Create lxc with one4 container'
+        sh 'curl -s https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/onedock/create-lxc-one5-container.sh | bash -s create-lxc one5test'
 
         stage 'Onedatastore test'
-        sh 'curl -s $RAW_REPO_PATH/functional-tests/001-onedatastore-test.sh | bash'
+        sh 'curl -s $TEST_REPO_PATH/001-test-create-ds | bash'
 
         stage 'Oneimage test'
-        sh 'curl -s $RAW_REPO_PATH/functional-tests/002-oneimage-test.sh | bash'
+        sh 'curl -s $TEST_REPO_PATH/002-test-create-image | bash'
 
         stage 'Onevnet test'
-        sh 'curl -s $RAW_REPO_PATH/functional-tests/003-onevnet-test.sh | bash'
+        sh 'curl -s $TEST_REPO_PATH/003-test-create-network | bash'
 
         stage 'Onehost test'
-        sh 'curl -s $RAW_REPO_PATH/functional-tests/004-onehost-test.sh | bash'
+        sh 'curl -s $TEST_REPO_PATH/004-test-create-host-one5 | bash'
 
         stage 'Onevm test 1'
-        sh 'curl -s $RAW_REPO_PATH/functional-tests/005-onevm-test.sh | bash'
+        sh 'curl -s $TEST_REPO_PATH/005-test-create-vm-1 | bash'
 
         stage 'Onevm test 2'
-        sh 'curl -s $RAW_REPO_PATH/functional-tests/006-onevm-test.sh | bash'
+        sh 'curl -s $TEST_REPO_PATH/006-test-create-vm-2 | bash'
 
         stage 'Destroy existing containers'
-        sh 'curl -s $RAW_REPO_PATH/stop-destroy-existing-containers.sh | bash'
+        sh 'curl -s https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/onedock/stop-destroy-existing-containers.sh | bash -s one5test'
     }
 
     stage 'Generate Packages'
