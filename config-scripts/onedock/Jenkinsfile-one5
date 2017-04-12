@@ -9,7 +9,7 @@ node('lxc') {
         stage 'Check for existing containers'
         sh 'curl -s https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/onedock/stop-destroy-existing-containers.sh | bash -s one5test'
 
-        stage 'Create lxc with one4 container'
+        stage 'Create lxc with one5 container'
         sh 'curl -s https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/onedock/create-lxc-one5-container.sh | bash -s create-lxc one5test'
 
         stage 'Onedatastore test'
