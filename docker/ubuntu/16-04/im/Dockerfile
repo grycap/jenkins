@@ -23,3 +23,9 @@ RUN pip install setuptools --upgrade -I
 RUN pip install pbr pyOpenSSL --upgrade -I
 RUN pip install cheroot
 RUN pip install pywinrm
+
+# Install RADL master branch
+RUN cd /tmp \
+ && git clone https://github.com/grycap/RADL  \
+ && cd RADL \
+ && pip install /tmp/RADL
