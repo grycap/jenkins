@@ -1,4 +1,5 @@
 # Get the docker IP
+NAME=$1
 DOCKER0IP=$(ip addr show dev docker0 | grep 'inet ' | awk '{print $2}' | sed 's/\/.*$//')
 
 # Create test data

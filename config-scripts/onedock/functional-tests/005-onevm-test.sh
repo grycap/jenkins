@@ -1,4 +1,5 @@
 # Create test data
+NAME=$1
 sudo lxc-attach -n $NAME -- bash -c "cat > /tmp/onedock.vm << EOT
 NAME = container-img
 CPU = 1

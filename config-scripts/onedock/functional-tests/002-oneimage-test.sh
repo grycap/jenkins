@@ -1,4 +1,6 @@
 # Create test data
+NAME=$1
+
 sudo lxc-attach -n $NAME -- bash -c 'cat > ubuntu-docker.tmpl << EOF
 NAME="ubuntu"
 PATH=docker://ubuntu:latest

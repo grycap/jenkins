@@ -1,4 +1,5 @@
 # Create one host
+NAME=$1
 sudo lxc-attach -n $NAME -- onehost create "ubuntu" -i onedock -v onedock -n dummy
 sleep 2
 
