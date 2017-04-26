@@ -2,7 +2,7 @@
 DOCKER0IP=$(ip addr show dev docker0 | grep 'inet ' | awk '{print $2}' | sed 's/\/.*$//')
 
 # Create test data
-sudo lxc-attach -n onetest -- bash -c "cat > docker-private.net << EOF
+sudo lxc-attach -n $NAME -- bash -c "cat > docker-private.net << EOF
 NAME=private
 BRIDGE=docker0
 NETWORK_ADDRESS="$DOCKER0IP"
@@ -14,8 +14,8 @@ VN_MAD=dummy
 EOF"
 
 # Create private net
-sudo lxc-attach -n onetest -- onevnet create docker-private.net
+sudo lxc-attach -n $NAME -- onevnet create docker-private.net
 sleep 2
 
 # Check if the net exists
-sudo lxc-attach -n onetest -- onevnet list | grep private
+sudo lxc-attach -n $NAME -- onevnet list | grep private
