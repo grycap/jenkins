@@ -13,7 +13,7 @@ EOT"
 sudo lxc-attach -n $NAME -- onevm create /tmp/onedock.vm
 
 # Check pending state
-while sudo lxc-attach -n $NAME -- onevm list | grep "container-img-second-vm" | awk '{if($5 == "pend"){ exit 0 } else { exit 1 }}'
+while sudo lxc-attach -n $NAME -- onevm list | grep "container-img-s" | awk '{if($5 == "pend"){ exit 0 } else { exit 1 }}'
 do
     sleep 2
 done
@@ -21,7 +21,7 @@ done
 sleep 30
 
 # Check running state
-sudo lxc-attach -n $NAME -- onevm list | grep "container-img-second-vm" | awk '{if($5 == "runn"){ exit 0 } else { exit 1 }}'
+sudo lxc-attach -n $NAME -- onevm list | grep "container-img-s" | awk '{if($5 == "runn"){ exit 0 } else { exit 1 }}'
 
 # Do a ping to check the machine
 IP=$(sudo lxc-attach -n $NAME -- bash -c 'onevm show -x 1 | /var/lib/one/remotes/datastore/xpath.rb /VM/TEMPLATE/NIC/IP')
