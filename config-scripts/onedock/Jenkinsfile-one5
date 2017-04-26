@@ -22,7 +22,7 @@ node('lxc') {
         sh 'curl -s $TEST_REPO_PATH/functional-tests/003-onevnet-test.sh | bash -s one5test'
 
         stage 'Onehost test'
-        sh 'curl -s $TEST_REPO_PATH/functional-tests/004-one5host-test.sh | bash -s one5test'
+        sh 'curl -s $TEST_REPO_PATH/functional-tests/004-onehost-test.sh | bash -s one5test'
 
         stage 'Onevm test 1'
         sh 'curl -s $TEST_REPO_PATH/functional-tests/005-onevm-test.sh | bash -s one5test'
