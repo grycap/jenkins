@@ -37,8 +37,12 @@ RUN pip3 install PyMySQL
 RUN pip3 install pywinrm
 RUN pip3 install tosca-parser
 
+# Install tosca-parser master branch
+RUN cd /tmp \
+ && git clone https://github.com/indigo-dc/tosca-parser  \
+ && pip3 install /tmp/tosca-parser
+
 # Install RADL master branch
 RUN cd /tmp \
  && git clone https://github.com/grycap/RADL  \
- && cd RADL \
  && pip3 install /tmp/RADL
