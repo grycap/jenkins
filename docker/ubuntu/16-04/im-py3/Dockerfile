@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install setuptools --upgrade -I
 RUN pip3 install pbr pyOpenSSL --upgrade -I
 RUN pip3 install cheroot
-RUN pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource
+RUN pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns
 RUN pip3 install apache-libcloud
 RUN pip3 install ansible
 RUN pip3 install PyMySQL
