@@ -44,4 +44,7 @@ RUN cd /tmp \
 # Install RADL master branch
 RUN cd /tmp \
  && git clone https://github.com/grycap/RADL  \
- && pip3 install /tmp/RADL
+ && pip3 install /tmp/RADL \
+# Set access rights to radl folder
+ && usermod -G staff -a jenkins \
+ && chmod 775 /usr/local/lib/python3.5/dist-packages/radl/
