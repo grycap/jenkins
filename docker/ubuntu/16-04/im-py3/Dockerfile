@@ -27,22 +27,22 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 
 # Install cheroot to enable REST API
-RUN pip3 install setuptools --upgrade -I
-RUN pip3 install pbr pyOpenSSL --upgrade -I
-RUN pip3 install cheroot
-RUN pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns
-RUN pip3 install apache-libcloud
-RUN pip3 install ansible
-RUN pip3 install PyMySQL
-RUN pip3 install pywinrm
+RUN su jenkins && pip3 install setuptools --upgrade -I
+RUN su jenkins && pip3 install pbr pyOpenSSL --upgrade -I
+RUN su jenkins && pip3 install cheroot
+RUN su jenkins && pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns
+RUN su jenkins && pip3 install apache-libcloud
+RUN su jenkins && pip3 install ansible
+RUN su jenkins && pip3 install PyMySQL
+RUN su jenkins && pip3 install pywinrm
 
 # Install tosca-parser master branch
-RUN cd /tmp \
+RUN su jenkins && cd /tmp \
  && git clone https://github.com/indigo-dc/tosca-parser  \
  && pip3 install /tmp/tosca-parser
 
 # Install RADL master branch
-RUN cd /tmp \
+RUN su jenkins && cd /tmp \
  && git clone https://github.com/grycap/RADL  \
  && pip3 install /tmp/RADL \
 # Set access rights to radl folder
