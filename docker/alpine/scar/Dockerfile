@@ -9,5 +9,5 @@ RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/re
 RUN apk add --no-cache \
   python3
 
-RUN pip3 install boto3  nose tabulate mock
+RUN pip3 install boto3 nose tabulate mock coverage
 
