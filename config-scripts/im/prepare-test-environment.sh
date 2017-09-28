@@ -5,11 +5,12 @@
 WORKSPACE=$1
 NAME_ID=$2
 IMAGE_ID=$3
+BRANCH_NAME=$4
 
 GITHUB_URL=https://raw.githubusercontent.com/grycap/jenkins/master/config-scripts/im
 
 # Build docker image and launch container
-curl -s $GITHUB_URL/build-and-launch-im-container.sh | bash -s $WORKSPACE $NAME_ID $IMAGE_ID
+curl -s $GITHUB_URL/build-and-launch-im-container.sh | bash -s $WORKSPACE $NAME_ID $IMAGE_ID $BRANCH_NAME
 
 # Disable IPv6 in test machines
 curl -s $GITHUB_URL/disable-ipv6-ansible.sh | bash -s $WORKSPACE
