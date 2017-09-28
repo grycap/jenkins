@@ -5,11 +5,12 @@
 WORKSPACE=$1
 NAME_ID=$2
 IMAGE_ID=$3
+BRANCH_NAME=$4
 
 cd $WORKSPACE/docker-devel
 
 # Create image based on 'devel' branch
-docker build -t $IMAGE_ID --no-cache -f Dockerfile .
+docker build --build-arg BRANCH=$BRANCH_NAME -t $IMAGE_ID --no-cache -f Dockerfile .
 
 # Start container
 docker run -dP --name $NAME_ID $IMAGE_ID
