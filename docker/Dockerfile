@@ -6,11 +6,15 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 RUN echo "@community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 # Update and install all the necessary packages
+RUN apk del git --purge
+
+# Update and install all the necessary packages
 RUN apk add --no-cache \
     sudo \
     curl \
     wget \
     bash \
+    git \
     shadow@community
 
 # Add jenkins user/group
