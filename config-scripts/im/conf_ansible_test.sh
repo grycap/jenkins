@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# $1 -> Job workspace
-# $2 -> Docker image of the O.S. to test
+# $1 -> Docker image of the O.S. to test
 
-WORKSPACE=$1
-SO=$2
+SO=$1
 
 cat <<EOT > inv
 [all]
@@ -23,7 +21,7 @@ while [ $OPEN -eq "0" ]; do
     sleep 2
 done
 
-ansible-playbook -i inv $WORKSPACE/contextualization/conf-ansible.yml -e IM_HOST=localhost
+ansible-playbook -i inv ./contextualization/conf-ansible.yml -e IM_HOST=localhost
 
 docker exec -ti $CONT_ID ansible --version
 RES=$?
