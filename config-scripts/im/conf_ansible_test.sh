@@ -12,6 +12,7 @@ EOT
 
 cat <<EOT > ansible.cfg
 [defaults]
+transport = paramiko
 host_key_checking = False
 nocolor = 1
 [paramiko_connection]
