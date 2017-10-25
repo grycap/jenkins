@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # $1 -> Docker image of the O.S. to test
+# $2 -> Port for the SSH access to the container
 
 SO=$1
 PORT=$2
