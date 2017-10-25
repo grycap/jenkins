@@ -31,7 +31,7 @@ done
 
 ansible-playbook -i inv ./contextualization/conf-ansible.yml -e IM_HOST=localhost
 
-docker exec -ti $CONT_ID ansible --version
+docker exec -t $CONT_ID ansible --version
 RES=$?
 echo "Removing container $CONT_ID"
 docker rm -f $CONT_ID
