@@ -7,12 +7,11 @@ PORT=$2
 
 cat <<EOT > inv
 [all]
-localhost ansible_port=$PORT ansible_user=root ansible_ssh_pass=Tututu+01
+localhost ansible_port=$PORT ansible_user=root ansible_ssh_pass=Tututu+01  ansible_ssh_common_args='-o UserKnownHostsFile=/dev/null'
 EOT
 
 cat <<EOT > ansible.cfg
 [defaults]
-transport = paramiko
 host_key_checking = False
 nocolor = 1
 [paramiko_connection]
