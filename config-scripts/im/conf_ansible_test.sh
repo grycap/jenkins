@@ -9,6 +9,14 @@ cat <<EOT > inv
 localhost ansible_port=1022 ansible_user=root ansible_ssh_pass=Tututu+01
 EOT
 
+cat <<EOT > ansible.cfg
+[defaults]
+host_key_checking = False
+nocolor = 1
+[paramiko_connection]
+record_host_keys=False
+EOT
+
 rm -f $HOME/.ssh/known_hosts
 
 echo "Launch container for SO: $SO"
@@ -35,5 +43,6 @@ else
 fi
 
 rm -f inv
+rm -f ansible.cfg
 
 exit $RES
