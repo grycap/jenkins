@@ -8,8 +8,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     curl \
     httpie \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+    gnupg
 
 # Add jenkins user/group
 RUN groupadd -g 1001 jenkins \
