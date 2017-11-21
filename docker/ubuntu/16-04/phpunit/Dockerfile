@@ -16,3 +16,5 @@ RUN apt-get update && apt-get install -y wget \
 RUN wget https://phar.phpunit.de/phpunit-6.4.phar && \
     chmod +x phpunit-6.4.phar && \
     mv phpunit-6.4.phar /usr/bin/phpunit
+
+RUN mkdir -p /var/www/.ec3/clusters && chmod 777 /var/www/.ec3/clusters
