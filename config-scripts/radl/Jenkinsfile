@@ -4,7 +4,7 @@ node {
     node('docker') {
         docker.image('grycap/jenkins:ubuntu14.04-python').inside {
             git url: 'https://github.com/grycap/RADL'
-            sh 'nosetests test/TestRADL.py --with-xunit --with-coverage --cover-erase --cover-html --cover-package=radl'
+            sh 'nosetests-2.7 test/TestRADL.py --with-xunit --with-coverage --cover-erase --cover-html --cover-package=radl'
 
             stash includes: 'cover/*', name: 'Coverage'
             stash includes: 'nosetests.xml', name: 'XUnit'
