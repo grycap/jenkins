@@ -7,7 +7,6 @@ RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/re
 
 # Update and install all the necessary packages
 RUN apk add --no-cache \
-  py-nose \
   py-boto \
   py-mysqldb \
   gcc \
@@ -19,10 +18,9 @@ RUN apk add --no-cache \
   python-dev \
   musl-dev \
   libffi-dev \
-  openssl-dev \
-  py-coverage@testing
+  openssl-dev 
 
-RUN pip install scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm coverage
+RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm coverage
 
 # Install RADL lib
 RUN git clone https://github.com/grycap/RADL /home/jenkins/RADL \
