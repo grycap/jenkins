@@ -7,6 +7,7 @@ RUN apk add \
   py-pip \
   python-dev \
   gcc \
+  g++ \  
   --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 RUN pip install tox
