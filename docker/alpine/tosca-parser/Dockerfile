@@ -5,6 +5,8 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 # Update and install all the necessary packages
 RUN apk add \
   py-pip \
+  python-dev \
+  gcc \
   --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 RUN pip install tox
