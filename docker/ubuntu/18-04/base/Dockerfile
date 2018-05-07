@@ -2,6 +2,9 @@ FROM ubuntu:18.04
 LABEL description="Base container image with the jenkins user configured"
 MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN=true
+
 # Update and install all the necessary packages
 RUN apt-get update && apt-get install -y \
     sudo \
@@ -10,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     httpie \
     software-properties-common \
     vim \
+    tzdata \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
