@@ -6,4 +6,4 @@ RUN pip3 install boto3 botocore pyinstaller
 COPY builder.sh .
 RUN chmod +x builder.sh
 
-CMD ./builder.sh
+ENTRYPOINT ["./builder.sh"]

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/grycap/oscar/master/src/providers/onpremises/openfaas/function/supervisor.py
-pyinstaller --onefile supervisor.py
-cat dist/supervisor
+wget $1 -O to_build.py
+pyinstaller --onefile to_build.py
+cat dist/to_build
 
