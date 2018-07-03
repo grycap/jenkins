@@ -9,12 +9,14 @@ RUN echo "@community http://nl.alpinelinux.org/alpine/edge/community" >> /etc/ap
 RUN apk del git --purge
 
 # Update and install all the necessary packages
+RUN apk add --upgrade apk-tools
 RUN apk add --no-cache \
     sudo \
     curl \
     wget \
     bash \
     git \
+    linux-headers \
     shadow@community
 
 # Add jenkins user/group
