@@ -6,6 +6,7 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 RUN apk add \
   py-pip \
   python-dev \
+  python3-dev \
   gcc \
   g++ \ 
   libffi-dev \
