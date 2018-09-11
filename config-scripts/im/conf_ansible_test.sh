@@ -30,9 +30,18 @@ while [ $OPEN -eq "0" ]; do
 done
 
 ansible-playbook -i inv ./contextualization/conf-ansible.yml -e IM_HOST=localhost
-
-docker exec -t $CONT_ID ansible --version
 RES=$?
+
+if [ $RES -eq 0 ]; then
+    # Test a reconfigure
+    ansible-playbook -i inv ./contextualization/conf-ansible.yml -e IM_HOST=localhost
+    RES=$?
+    if [ $RES -eq 0 ]; then
+        docker exec -t $CONT_ID ansible --version
+        RES=$?
+    fi
+fi
+
 echo "Removing container $CONT_ID"
 docker rm -f $CONT_ID
 
