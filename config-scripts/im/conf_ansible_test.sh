@@ -33,10 +33,12 @@ ansible-playbook -i inv ./contextualization/conf-ansible.yml -e IM_HOST=localhos
 RES=$?
 
 if [ $RES -eq 0 ]; then
+    echo "First attempt finished successfully"
     # Test a reconfigure
     ansible-playbook -i inv ./contextualization/conf-ansible.yml -e IM_HOST=localhost
     RES=$?
     if [ $RES -eq 0 ]; then
+        echo "Reconfiguration finished successfully"
         docker exec -t $CONT_ID ansible --version
         RES=$?
     fi
