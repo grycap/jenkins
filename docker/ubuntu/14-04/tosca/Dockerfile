@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     python-fixtures \
     python-testscenarios \
     python-dev \
+    python-stevedore \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
