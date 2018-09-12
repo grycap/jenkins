@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     python-dateutil \
     python-fixtures \
     python-testscenarios \
+    python-dev \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
