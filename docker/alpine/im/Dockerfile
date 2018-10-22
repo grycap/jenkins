@@ -18,8 +18,11 @@ RUN apk add --no-cache \
   python-dev \
   musl-dev \
   libffi-dev \
-  openssl-dev 
+  openssl-dev \
+  libssh2-dev \
+  make
 
+RUN pip install pip -U
 RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage ssh2-python coverage
 
 # Install RADL lib
