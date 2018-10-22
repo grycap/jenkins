@@ -20,7 +20,7 @@ RUN apk add --no-cache \
   libffi-dev \
   openssl-dev 
 
-RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage coverage
+RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage ssh2-python coverage
 
 # Install RADL lib
 RUN git clone https://github.com/grycap/RADL /home/jenkins/RADL \
