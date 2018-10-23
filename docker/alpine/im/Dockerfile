@@ -20,25 +20,15 @@ RUN apk add --no-cache \
   openssl-dev \
   libssh2-dev \
   make \
+  cmake \
   py-pep8
 
 RUN ln -s /usr/bin/pep8-2 /usr/bin/pep8
 RUN pip install pip -U
-RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage coverage
+RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage radl tosca-parser coverage
 RUN pip install ansible
-RUN pip install ssh2-python
 
-# Install RADL lib
-RUN git clone https://github.com/grycap/RADL /home/jenkins/RADL \
- && cd /home/jenkins/RADL \
- && python setup.py install > install.out \
- && RADL_PKG=$(cat install.out | grep "Processing RADL-.*" | awk '{print $2}') \
- && rm /usr/lib/python2.7/site-packages/$RADL_PKG \
- && mkdir -p /usr/lib/python2.7/site-packages/$RADL_PKG \
- && mv * /usr/lib/python2.7/site-packages/$RADL_PKG/
-
-# Install tosca-parser
-RUN cd /tmp \
- && git clone --recursive https://github.com/indigo-dc/tosca-parser.git \
- && cd tosca-parser \
- && pip install /tmp/tosca-parser
+# Install ssh2-python lib
+RUN git clone https://github.com/ParallelSSH/ssh2-python
+RUN cd ssh2-python && python setup.py install
+RUN ln -s /usr/lib/python2.7/site-packages/ssh2_python-*/ssh2/
