@@ -36,6 +36,7 @@ RUN su jenkins && pip3 install ansible
 RUN su jenkins && pip3 install PyMySQL
 RUN su jenkins && pip3 install pywinrm
 RUN su jenkins && pip3 install pyvmomi
+RUN su jenkins && pip3 install ssh2-python
 
 # Install tosca-parser master branch
 RUN su jenkins && cd /tmp \
