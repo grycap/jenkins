@@ -38,6 +38,7 @@ RUN su jenkins && pip3 install pywinrm
 RUN su jenkins && pip3 install pyvmomi
 RUN su jenkins && pip3 install ssh2-python
 RUN su jenkins && pip3 install defusedxml
+RUN su jenkins && pip3 install pymongo
 
 # Install tosca-parser master branch
 RUN su jenkins && cd /tmp \
