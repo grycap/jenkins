@@ -23,7 +23,6 @@ RUN apk add --no-cache \
   cmake \
   py-pep8
 
-RUN ln -s /usr/bin/pep8-2 /usr/bin/pep8
 RUN pip install pip -U
 RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage radl tosca-parser coverage defusedxml codacy-coverage pymongo
 RUN pip install ansible
