@@ -27,13 +27,15 @@ nocolor = 1
 record_host_keys=False
 EOT
 
-docker run --rm --link confansible:confansible -v "$PWD/inv:/tmp/inv" -v "$PWD/im/contextualization:/tmp/contextualization" -i grycap/im ansible-playbook -i /tmp/inv /tmp/contextualization/conf-ansible.yml -e IM_HOST=confansible
+curl -s https://raw.githubusercontent.com/grycap/im/devel/contextualization/conf-ansible.yml > conf-ansible.yml
+
+docker run --rm --link confansible:confansible -v "$PWD/inv:/tmp/inv" -v "$PWD/conf-ansible.yml:/tmp/conf-ansible.yml" -i grycap/im ansible-playbook -i /tmp/inv /tmp/conf-ansible.yml -e IM_HOST=confansible
 RES=$?
 
 if [ $RES -eq 0 ]; then
     echo "First attempt finished successfully"
     # Test a reconfigure
-    docker run --rm --link confansible:confansible -v "$PWD/inv:/tmp/inv" -v "$PWD/im/contextualization:/tmp/contextualization" -i grycap/im ansible-playbook -i /tmp/inv /tmp/contextualization/conf-ansible.yml -e IM_HOST=confansible
+    docker run --rm --link confansible:confansible -v "$PWD/inv:/tmp/inv" -v "$PWD/conf-ansible.yml:/tmp/conf-ansible.yml" -i grycap/im ansible-playbook -i /tmp/inv /tmp/conf-ansible.yml -e IM_HOST=confansible
     RES=$?
     if [ $RES -eq 0 ]; then
         echo "Reconfiguration finished successfully"
@@ -53,5 +55,6 @@ fi
 
 rm -f inv
 rm -f ansible.cfg
+rm -f conf-ansible.yml
 
 exit $RES
