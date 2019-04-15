@@ -24,6 +24,7 @@ cat <<EOT > ansible.cfg
 [defaults]
 host_key_checking = False
 nocolor = 1
+timeout = 30
 [paramiko_connection]
 record_host_keys=False
 EOT
