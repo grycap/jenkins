@@ -31,13 +31,13 @@ EOT
 
 curl -s https://raw.githubusercontent.com/grycap/im/devel/contextualization/conf-ansible.yml > conf-ansible.yml
 
-docker run --rm --link $CONT_ID:confansible -v "$PWD/inv:/tmp/inv" -v "$PWD/conf-ansible.yml:/tmp/conf-ansible.yml" -i grycap/im ansible-playbook -i /tmp/inv /tmp/conf-ansible.yml -e IM_HOST=confansible
+docker run --rm --link $CONT_ID:confansible -v "$PWD/ansible.cfg:/etc/ansible/ansible.cfg" -v "$PWD/inv:/tmp/inv" -v "$PWD/conf-ansible.yml:/tmp/conf-ansible.yml" -i grycap/im ansible-playbook -i /tmp/inv /tmp/conf-ansible.yml -e IM_HOST=confansible
 RES=$?
 
 if [ $RES -eq 0 ]; then
     echo "First attempt finished successfully"
     # Test a reconfigure
-    docker run --rm --link $CONT_ID:confansible -v "$PWD/inv:/tmp/inv" -v "$PWD/conf-ansible.yml:/tmp/conf-ansible.yml" -i grycap/im ansible-playbook -i /tmp/inv /tmp/conf-ansible.yml -e IM_HOST=confansible
+    docker run --rm --link $CONT_ID:confansible -v "$PWD/ansible.cfg:/etc/ansible/ansible.cfg" -v "$PWD/inv:/tmp/inv" -v "$PWD/conf-ansible.yml:/tmp/conf-ansible.yml" -i grycap/im ansible-playbook -i /tmp/inv /tmp/conf-ansible.yml -e IM_HOST=confansible
     RES=$?
     if [ $RES -eq 0 ]; then
         echo "Reconfiguration finished successfully"
