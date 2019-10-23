@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     python3-paramiko \
     python3-boto \
     python3-bottle \
+    python3-mysql.connector \
     libmysqld-dev \
     libsqlite3-dev \
     openssh-client \
