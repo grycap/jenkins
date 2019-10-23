@@ -24,7 +24,7 @@ RUN apk add --no-cache \
   py-pep8
 
 RUN pip install pip -U
-RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage radl tosca-parser coverage defusedxml codacy-coverage pymongo
+RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage radl tosca-parser coverage defusedxml codacy-coverage pymongo mysql-connector-python
 RUN pip install ansible
 
 # Install ssh2-python lib
