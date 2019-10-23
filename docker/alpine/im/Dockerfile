@@ -13,7 +13,6 @@ RUN apk add --no-cache \
   py-pip \
   procps \
   jq \
-  py-pep8 \
   python-dev \
   musl-dev \
   libffi-dev \
@@ -26,6 +25,7 @@ RUN apk add --no-cache \
 RUN pip install pip -U
 RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage radl tosca-parser coverage defusedxml codacy-coverage pymongo mysql-connector-python
 RUN pip install ansible
+RUN ln -s /usr/bin/pep8-2 /usr/bin/pep8
 
 # Install ssh2-python lib
 RUN git clone https://github.com/ParallelSSH/ssh2-python
