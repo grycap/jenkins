@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y \
 RUN su jenkins && pip3 install setuptools --upgrade -I
 RUN su jenkins && pip3 install pbr pyOpenSSL --upgrade -I
 RUN su jenkins && pip3 install cheroot
-RUN su jenkins && pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns azure-storage
+RUN su jenkins && pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns
 RUN su jenkins && pip3 install apache-libcloud
 RUN su jenkins && pip3 install ansible
 RUN su jenkins && pip3 install PyMySQL
@@ -42,15 +42,8 @@ RUN su jenkins && pip3 install defusedxml
 RUN su jenkins && pip3 install pymongo
 RUN su jenkins && pip3 install pycodestyle
 
-# Install tosca-parser master branch
-RUN su jenkins && cd /tmp \
- && git clone https://github.com/indigo-dc/tosca-parser  \
- && pip3 install /tmp/tosca-parser
+RUN su jenkins && pip3 install radl tosca-parser
 
-# Install RADL master branch
-RUN su jenkins && cd /tmp \
- && git clone https://github.com/grycap/RADL  \
- && pip3 install /tmp/RADL \
 # Set access rights to radl folder
- && usermod -G staff -a jenkins \
- && chmod 775 /usr/local/lib/python3.5/dist-packages/radl/
+RUN usermod -G staff -a jenkins \
+    && chmod 775 /usr/local/lib/python3.5/dist-packages/radl/
