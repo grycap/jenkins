@@ -20,10 +20,10 @@ RUN apk add --no-cache \
   libssh2-dev \
   make \
   cmake \
-  py-pep8
+  py-pycodestyle
 
 RUN pip install pip -U
-RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi azure-storage radl tosca-parser coverage defusedxml codacy-coverage pymongo mysql-connector-python
+RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi radl tosca-parser coverage defusedxml codacy-coverage pymongo mysql-connector-python
 RUN pip install ansible
 RUN ln -s /usr/bin/pep8-2 /usr/bin/pep8
 
