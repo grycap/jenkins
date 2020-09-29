@@ -38,12 +38,12 @@ RUN su jenkins && pip3 install ansible
 RUN su jenkins && pip3 install PyMySQL
 RUN su jenkins && pip3 install pywinrm
 RUN su jenkins && pip3 install pyvmomi
-RUN su jenkins && pip3 install ssh2-python
+#RUN su jenkins && pip3 install ssh2-python
 RUN su jenkins && pip3 install defusedxml
 RUN su jenkins && pip3 install pymongo
 RUN su jenkins && pip3 install pycodestyle
 
-RUN su jenkins && cd tmp && git clone https://github.com/micafer/tosca-parser && pip3 install /tmp/tosca-parser
+RUN su jenkins && cd /tmp && rm -rf tosca-parser && git clone https://github.com/micafer/tosca-parser && pip3 install /tmp/tosca-parser
 RUN su jenkins && pip3 install radl
 
 # Set access rights to radl folder
