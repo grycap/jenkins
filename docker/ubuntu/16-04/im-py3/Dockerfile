@@ -5,6 +5,7 @@ MAINTAINER Alfonso Pérez (alpegon3@upv.es)
 # Update and install all the neccesary packages
 RUN apt-get update && apt-get install -y \
     gcc \
+    git \
     python3-dev \
     python3-pip \
     python3-suds \
@@ -42,7 +43,8 @@ RUN su jenkins && pip3 install defusedxml
 RUN su jenkins && pip3 install pymongo
 RUN su jenkins && pip3 install pycodestyle
 
-RUN su jenkins && pip3 install radl tosca-parser
+RUN su jenkins && cd tmp && git clone https://github.com/micafer/tosca-parser && pip3 install /tmp/tosca-parser
+RUN su jenkins && pip3 install radl
 
 # Set access rights to radl folder
 RUN usermod -G staff -a jenkins \
