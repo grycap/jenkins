@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 
 # Install cheroot to enable REST API
-RUN su jenkins && pip3 install setuptools --upgrade -I
+RUN su jenkins && pip3 install "pip<21.0" setuptools setuptools_rust --upgrade -I
 RUN su jenkins && pip3 install pbr pyOpenSSL --upgrade -I
 RUN su jenkins && pip3 install cheroot
 RUN su jenkins && pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns
@@ -42,8 +42,8 @@ RUN su jenkins && pip3 install pyvmomi
 RUN su jenkins && pip3 install defusedxml
 RUN su jenkins && pip3 install pymongo
 RUN su jenkins && pip3 install pycodestyle
+RUN su jenkins && pip3 install tosca-parser
 
-RUN su jenkins && cd /tmp && rm -rf tosca-parser && git clone https://github.com/micafer/tosca-parser && pip3 install /tmp/tosca-parser
 RUN su jenkins && pip3 install radl
 
 # Set access rights to radl folder
