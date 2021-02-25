@@ -29,8 +29,9 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 
 # Install cheroot to enable REST API
-RUN su jenkins && pip3 install "pip<21.0" setuptools setuptools_rust --upgrade -I
-RUN su jenkins && pip3 install pbr pyOpenSSL --upgrade -I
+#RUN su jenkins && pip3 install setuptools --upgrade -I
+RUN su jenkins && pip3 install "cryptography==3.1.1"
+RUN su jenkins && pip3 install pbr "pyOpenSSL==19.1.0"
 RUN su jenkins && pip3 install cheroot
 RUN su jenkins && pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns
 RUN su jenkins && pip3 install apache-libcloud
@@ -44,7 +45,7 @@ RUN su jenkins && pip3 install pymongo
 RUN su jenkins && pip3 install pycodestyle
 RUN su jenkins && pip3 install tosca-parser
 
-RUN su jenkins && pip3 install radl
+RUN su jenkins && pip3 install radl==1.1.4
 
 # Set access rights to radl folder
 RUN usermod -G staff -a jenkins \
