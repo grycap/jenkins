@@ -45,7 +45,7 @@ RUN su jenkins && pip3 install pymongo
 RUN su jenkins && pip3 install pycodestyle
 RUN su jenkins && pip3 install tosca-parser
 
-RUN su jenkins && pip3 install radl==1.1.4
+RUN su jenkins && pip3 install radl
 
 # Set access rights to radl folder
 RUN usermod -G staff -a jenkins \

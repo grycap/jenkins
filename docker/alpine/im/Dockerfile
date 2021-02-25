@@ -7,27 +7,28 @@ RUN echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >> /etc/apk/re
 
 # Update and install all the necessary packages
 RUN apk add --no-cache \
-  py-boto \
-  py-mysqldb \
+  py3-boto \
+  py3-mysqlclient \
   gcc \
-  py-pip \
+  py3-pip \
   procps \
   jq \
-  python-dev \
+  python3-dev \
   musl-dev \
   libffi-dev \
   openssl-dev \
   libssh2-dev \
   make \
   cmake \
-  py-pycodestyle
+  py3-pycodestyle
 
-RUN pip install pip -U
-RUN pip install nose scp netaddr apache-libcloud mock bottle nose-timer suds azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi radl tosca-parser coverage defusedxml codacy-coverage pymongo mysql-connector-python
-RUN pip install ansible
+RUN pip3 install pip -U
+RUN pip3 install "cryptography==3.1.1"
+RUN pip3 install "pyOpenSSL==19.1.0"
+RUN pip3 install nose scp netaddr apache-libcloud mock bottle nose-timer suds-py3 azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi radl tosca-parser coverage defusedxml codacy-coverage pymongo mysql-connector-python
+RUN pip3 install ansible==2.9.15
 RUN ln -s /usr/bin/pep8-2 /usr/bin/pep8
 
 # Install ssh2-python lib
-RUN git clone https://github.com/ParallelSSH/ssh2-python
-RUN cd ssh2-python && python setup.py install
-RUN ln -s /usr/lib/python2.7/site-packages/ssh2_python-*/ssh2/
+#RUN git clone https://github.com/ParallelSSH/ssh2-python
+#RUN cd ssh2-python && python3 setup.py install
