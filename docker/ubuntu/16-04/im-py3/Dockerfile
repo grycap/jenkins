@@ -44,8 +44,9 @@ RUN su jenkins && pip3 install defusedxml
 RUN su jenkins && pip3 install pymongo
 RUN su jenkins && pip3 install pycodestyle
 RUN su jenkins && pip3 install tosca-parser
+RUN su jenkins && pip3 install hvac
 
-RUN su jenkins && pip3 install radl
+RUN su jenkins && pip3 install -U radl
 
 # Set access rights to radl folder
 RUN usermod -G staff -a jenkins \
