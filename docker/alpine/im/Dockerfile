@@ -25,7 +25,9 @@ RUN apk add --no-cache \
 RUN pip3 install pip -U
 RUN pip3 install "cryptography==3.1.1"
 RUN pip3 install "pyOpenSSL==19.1.0"
-RUN pip3 install nose scp netaddr apache-libcloud mock bottle nose-timer suds-py3 azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns pywinrm pyvmomi radl tosca-parser coverage defusedxml codacy-coverage pymongo mysql-connector-python
+RUN pip3 install nose scp netaddr apache-libcloud mock bottle nose-timer suds-py3 
+RUN pip3 install msrest msrestazure azure-common azure-mgmt-storage azure-mgmt-compute azure-mgmt-network azure-mgmt-resource azure-mgmt-dns
+RUN pip3 install pywinrm pyvmomi radl>=1.1.6 tosca-parser coverage defusedxml codacy-coverage pymongo mysql-connector-python hvac
 RUN pip3 install ansible==2.9.15
 RUN ln -s /usr/bin/pep8-2 /usr/bin/pep8
 
