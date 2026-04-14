@@ -4,6 +4,7 @@
 
 SO=$1
 CONT_NAME=$(echo "confansible_$1" | tr ':' '_' | tr '/' '_')
+BRANCH=${2:-devel}
 
 echo "Launch container for SOf: $SO"
 CONT_ID=$(docker run --name $CONT_NAME -d $SO /bin/bash -c "zypper -n install which sudo openssh; yum install -y sudo openssh-server;  apt-get update && apt-get install -y sudo openssh-server ; mkdir /var/run/sshd ; sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config ; sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config ; sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/g' /etc/ssh/sshd_config; rm -f /etc/ssh/ssh_host_rsa_key* ; ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' ; echo 'root:Tututu+01' | chpasswd ; sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd ;  echo 'RUNNING'; /usr/sbin/sshd -D")
@@ -30,7 +31,7 @@ interpreter_python = /usr/bin/python3
 record_host_keys=False
 EOT
 
-curl -s https://raw.githubusercontent.com/grycap/im/devel/contextualization/conf-ansible.yml > conf-ansible.yml
+curl -s https://raw.githubusercontent.com/grycap/im/$BRANCH/contextualization/conf-ansible.yml > conf-ansible.yml
 
 docker run --rm --link $CONT_ID:confansible -v "$PWD/ansible.cfg:/etc/ansible/ansible.cfg" -v "$PWD/inv:/tmp/inv" -v "$PWD/conf-ansible.yml:/tmp/conf-ansible.yml" -i grycap/im:devel ansible-playbook -i /tmp/inv /tmp/conf-ansible.yml -e IM_HOST=confansible
 RES=$?
