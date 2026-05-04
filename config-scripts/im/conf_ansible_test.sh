@@ -38,14 +38,14 @@ RES=$?
 
 if [ $RES -eq 0 ]; then
     echo "First attempt finished successfully"
-    docker exec -t $CONT_ID /var/tmp/.ansible/bin/ansible --version
+    docker exec -t $CONT_ID /var/tmp/.mamba/bin/micromamba run -n ansible ansible --version
     # Test a reconfigure
     docker run --rm --link $CONT_ID:confansible -v "$PWD/ansible.cfg:/etc/ansible/ansible.cfg" -v "$PWD/inv:/tmp/inv" -v "$PWD/conf-ansible.yml:/tmp/conf-ansible.yml" -i grycap/im:devel ansible-playbook -i /tmp/inv /tmp/conf-ansible.yml -e IM_HOST=confansible
     RES=$?
     if [ $RES -eq 0 ]; then
         echo "Reconfiguration finished successfully"
-        docker exec -t $CONT_ID /var/tmp/.ansible/bin/ansible --version
-        docker exec -t $CONT_ID /var/tmp/.ansible/bin/ansible-galaxy install grycap.im
+        docker exec -t $CONT_ID /var/tmp/.mamba/bin/micromamba run -n ansible  ansible --version
+        docker exec -t $CONT_ID /var/tmp/.mamba/bin/micromamba run -n ansible ansible-galaxy install grycap.im
         RES=$?
     fi
 fi
