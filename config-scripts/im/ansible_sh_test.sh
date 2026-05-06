@@ -18,9 +18,9 @@ while [ $OPEN -eq "0" ]; do
     sleep 4
 done
 
-docker exec -ti $CONT_ID /bin/bash -c "chmod +x /tmp/ansible_install.sh"
+docker exec -t $CONT_ID /bin/bash -c "chmod +x /tmp/ansible_install.sh"
 
-docker exec -ti $CONT_ID /bin/bash -c "/tmp/ansible_install.sh /tmp/test.log"
+docker exec -t $CONT_ID /bin/bash -c "/tmp/ansible_install.sh /tmp/test.log"
 
 docker exec -t $CONT_ID /var/tmp/.mamba/bin/micromamba run -n ansible ansible --version
 
