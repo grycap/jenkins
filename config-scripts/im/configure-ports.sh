@@ -9,8 +9,8 @@ cd $WORKSPACE/test
 # Get running port
 XMLRPC_PORT=$(sudo docker port $NAME_ID 8899 | awk -F "[:]" '{print $2}')
 # Set running port
-sed -i "s/TEST_PORT = 8899/TEST_PORT = $XMLRPC_PORT/g" integration/QuickTestIM.py
-sed -i "s/TEST_PORT = 8899/TEST_PORT = $XMLRPC_PORT/g" integration/TestIM.py
+# sed -i "s/TEST_PORT = 8899/TEST_PORT = $XMLRPC_PORT/g" integration/QuickTestIM.py
+# sed -i "s/TEST_PORT = 8899/TEST_PORT = $XMLRPC_PORT/g" integration/TestIM.py
 
 # Get running port
 REST_PORT=$(sudo docker port $NAME_ID 8800 | awk -F "[:]" '{print $2}')
